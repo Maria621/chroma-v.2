@@ -185,3 +185,123 @@ body.chroma-v3{font-family:'Poppins',Arial,sans-serif;background:#fff;color:var(
 .page-sobre .v3-hero-graphic{background:radial-gradient(circle at 75% 30%,#116baf,#04264d 54%,#031225),repeating-linear-gradient(45deg,transparent 0 45px,#ffffff08 45px 46px)}
 .page-unidades .v3-hero-graphic{background:radial-gradient(ellipse at 72% 20%,#168bc3,#083565 52%,#03152e)}
 .page-contato .v3-hero-graphic{background:radial-gradient(circle at 85% 75%,#147ac1,#06254e 60%,#031328)}
+
+/* V3.1 — Aplicação da marca oficial: sem tarjeta branca e sem alteração do desenho. */
+.chroma-v3 .site-header{
+  background:rgba(250,252,255,.985);
+  border-top:3px solid #ffe816;
+  border-bottom:1px solid rgba(10,54,102,.13);
+  box-shadow:0 10px 32px rgba(3,30,69,.085);
+  backdrop-filter:saturate(165%) blur(18px);
+  -webkit-backdrop-filter:saturate(165%) blur(18px);
+}
+.chroma-v3 .header-inner{height:91px;gap:24px;}
+.chroma-v3 .logo-link,
+.chroma-v3 .logo-link:visited{
+  display:inline-flex;
+  align-items:center;
+  flex:0 0 252px;
+  width:252px;
+  min-height:56px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:inherit;
+  box-shadow:none;
+  isolation:isolate;
+}
+.chroma-v3 .logo-link img{
+  display:block;
+  width:252px;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  object-position:left center;
+  filter:none;
+  transition:transform .2s ease;
+}
+.chroma-v3 .logo-link:hover img{transform:scale(1.018);transform-origin:left center;}
+.chroma-v3 .desktop-nav{gap:clamp(12px,1.35vw,21px)}
+.chroma-v3 .desktop-nav a{
+  color:#193855;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:0;
+  padding:16px 0;
+}
+.chroma-v3 .desktop-nav a:hover,
+.chroma-v3 .desktop-nav a[aria-current=page]{color:#00559a;}
+.chroma-v3 .desktop-nav a:after{background:#ffe816;height:3px;bottom:8px;}
+.chroma-v3 .header-cta{
+  background:#07559f;
+  color:white;
+  border:1px solid #07559f;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:800;
+  padding:12px 16px;
+  box-shadow:0 5px 15px #00559a1c;
+}
+.chroma-v3 .header-cta:hover{background:#043c75;color:#fff;border-color:#043c75;}
+.chroma-v3 .menu-toggle span{background:#0b3768;}
+.chroma-v3 .menu-toggle{color:#0b3768;}
+.chroma-v3 .mobile-nav{background:#f6f9fe;border-top:1px solid #dce6f1;box-shadow:0 15px 20px #052a4f19;}
+.chroma-v3 .mobile-nav a{color:#173b66;border-bottom-color:#dce6f1;}
+.chroma-v3 .mobile-nav a[aria-current=page]{color:#00559a;}
+
+/* Rodapé claro permite exibir a MESMA arte institucional azul, sem remendos. */
+.chroma-v3 .site-footer{background:#ecf3fa;color:#0b2d52;border-top:4px solid #ffde26;}
+.chroma-v3 .footer-top{gap:70px;padding-top:0;padding-bottom:46px;}
+.chroma-v3 .footer-about>a:first-child,
+.chroma-v3 .footer-about>a:first-child:visited{
+  display:inline-flex;
+  background:transparent;
+  padding:0;
+  border-radius:0;
+  box-shadow:none;
+}
+.chroma-v3 .footer-about>a:first-child img{
+  display:block;
+  width:235px;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  object-position:left center;
+  filter:none;
+}
+.chroma-v3 .footer-about p{color:#506b85;max-width:380px;font-size:13px;margin-top:22px;}
+.chroma-v3 .footer-label{color:#4a6a8b;}
+.chroma-v3 .social-link{color:#07559a;text-decoration:underline;text-underline-offset:4px;}
+.chroma-v3 .footer-nav a{color:#1a3b5d;}
+.chroma-v3 .footer-nav a:hover,.chroma-v3 .social-link:hover{color:#005fa8;}
+.chroma-v3 .footer-bottom{border-top:1px solid #c7d7e7;color:#56728e;}
+
+@media(max-width:1200px){
+  .chroma-v3 .header-inner{gap:16px;}
+  .chroma-v3 .logo-link{width:218px;flex-basis:218px;min-height:45px;padding:0;}
+  .chroma-v3 .logo-link img{width:218px;}
+  .chroma-v3 .desktop-nav{gap:12px;}
+  .chroma-v3 .desktop-nav a{font-size:10.6px;}
+  .chroma-v3 .header-cta{padding:11px 12px;font-size:10px;}
+}
+@media(max-width:1000px){
+  .chroma-v3 .header-inner{height:76px;}
+  .chroma-v3 .logo-link{width:218px;flex-basis:218px;padding:0;}
+  .chroma-v3 .logo-link img{width:218px;}
+  .chroma-v3 .mobile-nav{padding-bottom:16px;}
+}
+@media(max-width:760px){
+  .chroma-v3 .header-inner{height:73px;gap:8px;}
+  .chroma-v3 .logo-link{width:202px;flex-basis:202px;min-height:45px;padding:0;}
+  .chroma-v3 .logo-link img{width:202px;}
+  .chroma-v3 .menu-toggle{padding:11px;min-width:47px;min-height:47px;margin-left:auto;}
+  .chroma-v3 .footer-about>a:first-child img{width:223px;}
+}
+@media(max-width:360px){
+  .chroma-v3 .logo-link{width:188px;flex-basis:188px;}
+  .chroma-v3 .logo-link img{width:188px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .chroma-v3 .logo-link img{transition:none;}
+}

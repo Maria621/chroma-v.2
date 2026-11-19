@@ -1,4 +1,4 @@
-# Instituto Chroma — site institucional V3.6 (Etapa 01)
+# Instituto Chroma — site institucional V3.6 (Etapas 01–04)
 
 Evolução editorial controlada da V3.5: marcos históricos de unidades confirmados, identidade institucional padronizada e pendências separadas para validação. O layout e as interações aprovados foram preservados. A publicação permanece estática, com componentes reutilizáveis e JavaScript modular.
 
@@ -6,7 +6,7 @@ Evolução editorial controlada da V3.5: marcos históricos de unidades confirma
 
 - `src/pages/`: conteúdo HTML original de cada uma das seis páginas, com marcações para o cabeçalho/rodapé compartilhados.
 - `src/partials/`: cabeçalho e rodapé únicos, reutilizados no build.
-- `src/styles/modules/`: **seis módulos CSS de origem**, mantidos na ordem de `src/styles/manifest.mjs`; o build concatena um único `dist/assets/css/site.css`. Consulte `src/styles/README.md`.
+- `src/styles/modules/`: **sete módulos CSS de origem**, mantidos na ordem de `src/styles/manifest.mjs`; o build concatena um único `dist/assets/css/site.css`. Consulte `src/styles/README.md`.
 - `src/scripts/components/`: navegação, carrossel, linha do tempo, lightbox, unidades, contato e notícias com responsabilidades separadas.
 - `src/data/timeline.js`: somente os quatro marcos de unidades informados pela equipe (2016, 2019, 2022, 2026).
 - `docs/validacao-institucional.md`: fatos confirmados, registros legados e pendências.
@@ -14,6 +14,7 @@ Evolução editorial controlada da V3.5: marcos históricos de unidades confirma
 - `scripts/build.mjs`: compilador sem dependências externas que une os parciais e produz `dist/`.
 - `tests/project.test.mjs`: testes de referências internas, integridade de recursos, estrutura, CTA e contrastes críticos.
 - `tests/institutional.test.mjs`: testes de regressão para os marcos, a identidade e Valinhos.
+- `tests/design-system.test.mjs`: validação de fontes, legibilidade e contraste de tokens WCAG AA.
 - `tests/visual_qa.py`: roteiro de QA visual e funcional local para Chromium + Playwright, sem depender de um domínio público.
 
 ## Executar
@@ -52,3 +53,7 @@ A branch `preview/v3-6-etapa2-funcionalidades` mantém o layout da V3.5 e acresc
 ## Etapa 03 — Arquitetura modular
 
 HTML formatado nas seis páginas, build de CSS modular e verificação de equivalência de saída em `tests/architecture.test.mjs`. As regras CSS de produção foram preservadas sem alteração. Consulte `docs/etapa-03-arquitetura.md`.
+
+## Etapa 04 — Design System e tipografia
+
+Montserrat continua nos títulos e elementos de navegação; Poppins permanece nos textos corridos. Tokens centrais foram adicionados no módulo final do CSS, e textos auxiliares com contraste insuficiente foram corrigidos. O hero e o carrossel permanecem como aprovados. Consulte `docs/etapa-04-design-system.md`.

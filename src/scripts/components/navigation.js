@@ -9,12 +9,14 @@ export function initNavigation() {
     backdrop.hidden = true;
     document.body.append(backdrop);
     let previousFocus = null;
+    const background = [document.querySelector("main"), document.querySelector("footer")].filter(Boolean);
     const setOpen = (open, restoreFocus = false) => {
       mobile.hidden = !open;
       backdrop.hidden = !open;
       menu.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
       document.body.classList.toggle('v33-menu-open', open);
+      background.forEach(element => { element.inert = open; });
       if (open) { previousFocus = document.activeElement; mobile.querySelector('a')?.focus(); }
       else if (restoreFocus) (previousFocus && previousFocus.isConnected ? previousFocus : menu).focus();
     };
@@ -30,7 +32,7 @@ export function initNavigation() {
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     });
-    window.addEventListener('resize', () => { if (window.innerWidth > 1000 && !mobile.hidden) setOpen(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 1000 && !mobile.hidden) setOpen(false, true); });
   }
   const scrollTop = document.createElement('button');
   scrollTop.type = 'button'; scrollTop.className = 'v33-scrolltop';

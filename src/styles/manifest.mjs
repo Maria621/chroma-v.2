@@ -7,4 +7,5 @@ export const CSS_MODULES = Object.freeze([
   '05-quality-accessibility.css',
   '06-reviewed-fixes.css',
   '07-design-system.css',
+  '08-visual-refinement.css',
 ]);

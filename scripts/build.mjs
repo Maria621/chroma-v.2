@@ -1,37 +1,87 @@
-/** Build estático multipágina sem dependências. A origem é /src e a publicação é /dist. */
-import {readFile,writeFile,mkdir,cp,rm,access} from 'node:fs/promises';
+/** Build estático multipágina, sem dependências externas. Origem: src/. Saída: dist/. */
+import {readFile, writeFile, mkdir, cp, rm, access} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const read = relative => readFile(path.join(root,relative),'utf8');
-const pages=['index','a-chroma','nosso-trabalho','projetos-e-parcerias','unidades','contato'];
-const dist=path.join(root,'dist');
-await rm(dist,{recursive:true,force:true});await mkdir(dist,{recursive:true});
-const headerTemplate=await read('src/partials/header.html');
-const footer=await read('src/partials/footer.html');
-for(const slug of pages){
- const file=`${slug}.html`;
- let head=headerTemplate.replaceAll(' aria-current="page"','');
- head=head.replace(/(<a\b[^>]*href="([^"]+)"[^>]*)(>)/g,(full,start,href,end)=>{
-   // A marca é sempre um link; marcação de página atual apenas nos menus.
-   return href===file && !start.includes('logo-link')?`${start} aria-current="page"${end}`:full;
- });
- const source=await read(`src/pages/${file}`);
- if(!source.includes('<!-- CHROMA_HEADER -->')||!source.includes('<!-- CHROMA_FOOTER -->'))throw Error('Placeholder ausente: '+file);
- const rendered=source.replace('<!-- CHROMA_HEADER -->',head).replace('<!-- CHROMA_FOOTER -->',footer);
- await writeFile(path.join(dist,file),rendered,'utf8');
+import {CSS_MODULES} from '../src/styles/manifest.mjs';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const pages = [
+  'index',
+  'a-chroma',
+  'nosso-trabalho',
+  'projetos-e-parcerias',
+  'unidades',
+  'contato',
+];
+const dist = path.join(root, 'dist');
+
+const read = relative => readFile(path.join(root, relative), 'utf8');
+const canAccess = async folder => {
+  try {
+    await access(folder);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+function buildHeader(template, filename) {
+  const base = template.replaceAll(' aria-current="page"', '');
+  return base.replace(/(<a\b[^>]*href="([^"]+)"[^>]*)(>)/g, (full, opening, href, close) => {
+    const isLogo = opening.includes('logo-link');
+    return href === filename && !isLogo
+      ? `${opening} aria-current="page"${close}`
+      : full;
+  });
 }
-// A pasta assets/ original é a referência da marca; public/ é fallback portátil do pacote.
-const canAccess=async folder=>{try{await access(folder);return true}catch{return false}};
-const brandAssets=(await canAccess(path.join(root,'assets')))?path.join(root,'assets'):path.join(root,'public/assets');
-const contentAssets=(await canAccess(path.join(root,'conteudo')))?path.join(root,'conteudo'):path.join(root,'public/conteudo');
-await cp(brandAssets,path.join(dist,'assets'),{recursive:true});
-await cp(contentAssets,path.join(dist,'conteudo'),{recursive:true});
-await mkdir(path.join(dist,'assets','css'),{recursive:true});
-await mkdir(path.join(dist,'assets','js'),{recursive:true});
-await mkdir(path.join(dist,'assets','data'),{recursive:true});
-const css=(await read('src/styles/site.css')).replace(/url\((['"]?)assets\//g,'url($1../');
-await writeFile(path.join(dist,'assets/css/site.css'),css,'utf8');
-await cp(path.join(root,'src/scripts'),path.join(dist,'assets/js'),{recursive:true});
-await cp(path.join(root,'src/data'),path.join(dist,'assets/data'),{recursive:true});
-console.log('Build Chroma: 6 páginas; 1 CSS; componentes JS; assets. Saída: dist/');
+
+/** Remove apenas quebras de linha acrescentadas entre tags na formatação do fonte. */
+export function compactHtmlSource(html) {
+  return html.replace(/>\n[ \t]*</g, '><');
+}
+
+await rm(dist, {recursive: true, force: true});
+await mkdir(dist, {recursive: true});
+
+const [headerTemplate, footer] = await Promise.all([
+  read('src/partials/header.html'),
+  read('src/partials/footer.html'),
+]);
+
+for (const slug of pages) {
+  const filename = `${slug}.html`;
+  const source = await read(`src/pages/${filename}`);
+  if (!source.includes('<!-- CHROMA_HEADER -->') || !source.includes('<!-- CHROMA_FOOTER -->')) {
+    throw new Error(`Placeholder ausente: ${filename}`);
+  }
+
+  const html = compactHtmlSource(source)
+    .replace('<!-- CHROMA_HEADER -->', buildHeader(headerTemplate, filename))
+    .replace('<!-- CHROMA_FOOTER -->', footer);
+  await writeFile(path.join(dist, filename), html, 'utf8');
+}
+
+const brandAssets = (await canAccess(path.join(root, 'assets')))
+  ? path.join(root, 'assets')
+  : path.join(root, 'public/assets');
+const contentAssets = (await canAccess(path.join(root, 'conteudo')))
+  ? path.join(root, 'conteudo')
+  : path.join(root, 'public/conteudo');
+
+await Promise.all([
+  cp(brandAssets, path.join(dist, 'assets'), {recursive: true}),
+  cp(contentAssets, path.join(dist, 'conteudo'), {recursive: true}),
+]);
+
+const cssSource = (await Promise.all(
+  CSS_MODULES.map(moduleName => read(`src/styles/modules/${moduleName}`)),
+)).join('');
+
+const compiledCss = cssSource.replace(/url\((['"]?)assets\//g, 'url($1../');
+await mkdir(path.join(dist, 'assets', 'css'), {recursive: true});
+await writeFile(path.join(dist, 'assets', 'css', 'site.css'), compiledCss, 'utf8');
+
+await cp(path.join(root, 'src/scripts'), path.join(dist, 'assets/js'), {recursive: true});
+await cp(path.join(root, 'src/data'), path.join(dist, 'assets/data'), {recursive: true});
+
+console.log(`Build Chroma: ${pages.length} páginas, ${CSS_MODULES.length} módulos CSS concatenados, JavaScript modular. Saída: dist/`);

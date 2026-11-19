@@ -35,6 +35,9 @@ export function initContactForm() {
   const fallback = document.getElementById('whatsappFallback');
   const status = document.getElementById('contactStatus');
   if (!nameInput || !messageInput || !unitSelect || !subjectSelect) return;
+  // Evita envio GET do formulário quando o script não está disponível.
+  const submitButton = form.querySelector('[type="submit"]');
+  if (submitButton) submitButton.disabled = false;
 
   const clearFeedback = () => {
     if (fallback) fallback.hidden = true;

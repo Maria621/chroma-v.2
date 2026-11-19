@@ -61,6 +61,23 @@ try:
     pg.set_content(inline_page(page),wait_until='load',timeout=60000)
     pg.wait_for_timeout(120)
     d=pg.evaluate('''() => { const vw=window.innerWidth; const els=[...document.querySelectorAll('body *')];const visible=e=>{const s=getComputedStyle(e),r=e.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&+s.opacity!==0&&r.width>0&&r.height>0};return {overflow:els.filter(e=>{const r=e.getBoundingClientRect();return visible(e)&&r.right>vw+4&&r.width>9&&!(()=>{let a=e.parentElement;while(a&&a!==document.body){const st=getComputedStyle(a),b=a.getBoundingClientRect();if(/hidden|clip/.test(st.overflowX)&&b.right<=vw+2)return true;a=a.parentElement;}return false})()}).slice(0,12).map(e=>({tag:e.tagName,cls:e.className.toString().slice(0,65),right:Math.round(e.getBoundingClientRect().right)})), brokenImages:[...document.images].filter(i=>i.getAttribute('src') && i.loading!=='lazy' && i.complete && i.naturalWidth===0).map(i=>(i.getAttribute('alt')||'sem descrição').slice(0,100)), buttons: [...document.querySelectorAll('button')].filter(visible).filter(e=>{const r=e.getBoundingClientRect();return r.width<24||r.height<24}).map(e=>({name:e.getAttribute('aria-label')||e.textContent.slice(0,25),width:Math.round(e.getBoundingClientRect().width),height:Math.round(e.getBoundingClientRect().height)})), footer: Math.round(document.querySelector('footer').getBoundingClientRect().height), header:Math.round(document.querySelector('header').getBoundingClientRect().height), main:Math.round(document.querySelector('main').getBoundingClientRect().height), h1Count:document.querySelectorAll('h1').length, stylesheets:[...document.styleSheets].map(s=>s.href).filter(Boolean) } }''')
+    d['typography']=pg.evaluate("""() => {
+      const root = getComputedStyle(document.documentElement);
+      const heading = document.querySelector('main h1');
+      const note = document.querySelector('.v3-note, .v3-source, .v3-story-meta, .v3-unit dt, .v3-whatsapp-form small');
+      const muted = root.getPropertyValue('--ds-muted-text').trim();
+      return {
+        bodyFamily: getComputedStyle(document.body).fontFamily,
+        headingFamily: heading ? getComputedStyle(heading).fontFamily : '',
+        supportFontSize: note ? getComputedStyle(note).fontSize : null,
+        supportColor: note ? getComputedStyle(note).color : null,
+        mutedToken: muted,
+      };
+    }""")
+    if 'Poppins' not in d['typography']['bodyFamily']:
+     errors.append('Fonte do corpo não é Poppins')
+    if 'Montserrat' not in d['typography']['headingFamily']:
+     errors.append('Fonte de título não é Montserrat')
     d.update({'page':page,'width':w,'errors':errors,'httpErrors':status})
     if w in (390,1440):
      pg.screenshot(path=str(out/f'{page}-{w}.png'),full_page=True)

@@ -3,7 +3,7 @@
 Nesta versão, o site continua utilizando **um único CSS de produção**:
 `dist/assets/css/site.css`, gerado no build.
 
-As fontes foram separadas em sete módulos ordenados, definidos em
+As fontes foram separadas em oito módulos ordenados, definidos em
 `src/styles/manifest.mjs`:
 
 | Arquivo | Responsabilidade | Observação |
@@ -14,14 +14,15 @@ As fontes foram separadas em sete módulos ordenados, definidos em
 | `04-interaction-system.css` | Componentes e refinamentos V3.3/V3.4 | Mantém carrossel, timeline e comportamento responsivo |
 | `05-quality-accessibility.css` | Tokens e verificações de contraste/QA | Regras anteriores preservadas |
 | `06-reviewed-fixes.css` | Correções aprovadas nas Etapas 01 e 02 | Migrar futuras correções para o módulo correspondente após QA |
-| `07-design-system.css` | Tipografia, legibilidade e tokens semânticos V3.6 | Último módulo da cascata; não alterar hero nem carrossel |
+| `07-design-system.css` | Tipografia, legibilidade e tokens semânticos V3.6 | Preservado e protegido por checksum na Etapa 05 |
+| `08-visual-refinement.css` | Hierarquia visual de heros, fotos, campanhas, unidades e rodapé | Último módulo da cascata, isolado para a Etapa 05 |
 
 ## Invariantes da migração
 
 1. Na Etapa 03, a concatenação dos seis módulos originais era idêntica ao antigo monolito. A Etapa 04 modifica de forma controlada os módulos 02 e 04 e adiciona o módulo 07. Quatro módulos inalterados continuam protegidos por checksum.
 2. Ordem dos módulos é obrigatória: alterar esta sequência altera a cascata CSS.
 3. O arquivo compilado continua exatamente no mesmo caminho `assets/css/site.css`; nenhuma página muda sua referência.
-4. `tests/architecture.test.mjs` preserva os hashes dos módulos não alterados, valida a ordem de sete módulos e compara o CSS compilado à concatenação. `tests/design-system.test.mjs` verifica fontes e contraste de tokens.
+4. `tests/architecture.test.mjs` preserva os hashes dos módulos não alterados (incluindo o Design System da Etapa 04), valida a ordem de oito módulos e compara o CSS compilado à concatenação. `tests/design-system.test.mjs` verifica fontes e contraste; `tests/visual-media.test.mjs` protege a Etapa 05.
 5. As seis páginas HTML originais foram somente indentadas. `scripts/build.mjs` remove quebras de linha geradas entre tags para manter a saída idêntica à etapa anterior.
 
 ## Padrões de manutenção

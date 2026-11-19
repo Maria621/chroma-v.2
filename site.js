@@ -34,10 +34,10 @@
     show(0);
   }
   const timelineData=[
-    {date:'SETEMBRO / 2026',title:'Empreender é também aprender.',description:'Um projeto de empresa desenvolvido em equipe convida os estudantes a pensar em setores, responsabilidades e a aplicação de conhecimentos na prática.',graphic:'IDEIAS<br>QUE SE<br>REALIZAM',year:'2026.'},
-    {date:'OUTUBRO / 2026',title:'Projetos digitais ganham forma.',description:'Atividades práticas de programação e games envolveram a criação de sites com HTML, CSS e JavaScript e experiências no Roblox Studio.',graphic:'CRIAR.<br>TESTAR.<br>EVOLUIR.',year:'2026.'},
-    {date:'NOVEMBRO / 2026',title:'Do texto à apresentação profissional.',description:'Uma atividade prática de Word reuniu produção de texto, construção de conclusões próprias e preparação para a etapa de formatação.',graphic:'ESCREVER.<br>FORMATAR.<br>COMPARTILHAR.',year:'2026.'},
-    {date:'NOVEMBRO / 2026',title:'Participar também é conquistar.',description:'A campanha Presença Premiada destaca frequência, compromisso e participação dos estudantes no cotidiano escolar.',img:'assets/banner-presenca-premiada.webp',alt:'Cartaz oficial da campanha Presença Premiada'}
+    {date:'UMA IDEIA',title:'Todo potencial merece ser descoberto.',description:'O propósito de despertar habilidades e ampliar horizontes orienta a narrativa institucional da Chroma.',graphic:'O PRIMEIRO<br>PASSO',year:'CHROMA'},
+    {date:'APRENDER FAZENDO',title:'O conhecimento ganha sentido na prática.',description:'Tecnologia, idiomas e formação profissional se conectam à metodologia de estudo, fixação e projetos orientados.',graphic:'ESTUDAR.<br>CRIAR.',year:'CHROMA'},
+    {date:'MAIS CONEXÕES',title:'A educação se aproxima da comunidade.',description:'Iniciativas como o Aluno Nota 10 reforçam o incentivo ao esforço escolar e a aproximação com escolas públicas.',graphic:'ESCOLAS.<br>PESSOAS.',year:'CHROMA'},
+    {date:'O QUE VEM PELA FRENTE',title:'A próxima história também é construída pelo aluno.',description:'Novos projetos, repertórios e experiências continuam fazendo parte da proposta educacional da instituição.',graphic:'SEGUIR.<br>EVOLUIR.',year:'CHROMA'}
   ];
   const timeline=document.querySelector('.timeline-widget');
   if(timeline){
@@ -103,3 +103,13 @@
       }
     }).catch(()=>{/* Static content is the intentional fallback. */});
 })();
+
+/* V3: contato por WhatsApp, sem coleta ou armazenamento em servidor. */
+(()=>{const form=document.getElementById('chromaContactForm');if(!form)return;
+form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;
+const el=id=>document.getElementById(id);
+const number=el('contactUnit').value==='sorocaba'?'5515974035244':'5511947108867';
+const msg=['Olá, equipe Chroma!','Meu nome: '+el('contactName').value.trim(),'Unidade: '+el('contactUnit').selectedOptions[0].textContent,'Assunto: '+el('contactSubject').value,'Mensagem: '+el('contactMessage').value.trim()].join('\n');
+const href='https://wa.me/'+number+'?text='+encodeURIComponent(msg);
+window.open(href,'_blank','noopener,noreferrer');
+});})();

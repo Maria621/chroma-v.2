@@ -19,7 +19,7 @@ body.chroma-v3{font-family:"Poppins",Arial,sans-serif;background:#fff;color:var(
 .chroma-v3 .v3-heading-row>p{max-width:350px;margin-bottom:4px}
 .chroma-v3 .v3-link{display:inline-flex;gap:25px;align-items:center;justify-content:space-between;border-bottom:2px solid var(--v3-blue);padding:11px 0 9px;font:800 13px/1.5 Montserrat,sans-serif;color:#083f82;text-decoration:none;margin-top:14px;transition:gap .2s ease}
 .chroma-v3 .v3-link:hover{gap:37px}
-.chroma-v3 .v3-note{font-size:12px!important;line-height:1.75!important;color:#6a7b90!important;border-left:3px solid #facb22;padding:12px 0 12px 17px;background:#f4f8fc;margin-top:22px}
+.chroma-v3 .v3-note{font-size:12px;line-height:1.75;color:#6a7b90;border-left:3px solid #facb22;padding:12px 0 12px 17px;background:#f4f8fc;margin-top:22px}
 .chroma-v3 .v3-hero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,#071934,#084987);color:white;min-height:685px;display:flex;flex-direction:column;justify-content:end}
 .chroma-v3 .v3-sub-hero{min-height:530px}
 .chroma-v3 .v3-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% center;z-index:-3}
@@ -123,7 +123,7 @@ body.chroma-v3{font-family:"Poppins",Arial,sans-serif;background:#fff;color:var(
 .chroma-v3 .v3-card-grid h3{font:800 24px/1.18 Montserrat,sans-serif;letter-spacing:-.05em;margin:28px 0 15px}
 .chroma-v3 .v3-card-grid p{font-size:13px;margin:0}
 .chroma-v3 .v3-card-grid small{font-size:10px;color:#7588a0;display:block;margin-top:18px}
-.chroma-v3 .v3-source{font-size:11px!important;margin-top:24px;color:#62758b!important}
+.chroma-v3 .v3-source{font-size:11px;margin-top:24px;color:#62758b}
 .chroma-v3 .v3-source a{color:#0a5a9e}
 .chroma-v3 .v3-growth,.chroma-v3 .v3-support{background:white}
 .chroma-v3 .v3-growth .v3-card-grid{margin-top:35px}

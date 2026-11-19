@@ -6,7 +6,9 @@ export function initTimeline() {
   const tabs = [...widget.querySelectorAll('[role="tab"]')];
   const panel = widget.querySelector('#tm-panel');
   const axis = widget.querySelector('.timeline-axis');
-  if(!tabs.length || !panel) return;
+  if(!tabs.length || !panel || tabs.length !== timelineData.length) return;
+  tabs.forEach((tab, index) => { tab.id = tab.id || `timeline-tab-${index + 1}`; });
+  panel.setAttribute("aria-labelledby", tabs[0].id);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let current=0;
   const render = (value,focus=false, userAction=false) => {
@@ -17,6 +19,7 @@ export function initTimeline() {
       tab.setAttribute('aria-selected',String(active));
       tab.tabIndex=active?0:-1;
     });
+    panel.setAttribute('aria-labelledby', tabs[current].id);
     panel.querySelector('.timeline-date').textContent=d.date;
     panel.querySelector('h3').textContent=d.title;
     panel.querySelector('.timeline-content p').textContent=d.description;
@@ -27,7 +30,7 @@ export function initTimeline() {
     d.graphic.forEach((part,i)=>{if (i)span.append(document.createElement('br'));span.append(document.createTextNode(part));});
     const year=document.createElement('strong');year.textContent=d.year;
     graphic.append(span,year);visual.replaceChildren(graphic);
-    axis?.style.setProperty('--v33-progress',Math.round(current/(tabs.length-1)*100)+'%');
+    axis?.style.setProperty('--v33-progress',Math.round(current/Math.max(1,tabs.length-1)*100)+'%');
     const tab=tabs[current];
     if (userAction && matchMedia('(max-width:760px)').matches) tab.scrollIntoView({behavior:reduced?'auto':'smooth',block:'nearest',inline:'center'});
     if(focus)tab.focus();

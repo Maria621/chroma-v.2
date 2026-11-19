@@ -44,3 +44,7 @@ A produção V2.2 e as versões de prévia anteriores não devem ser sobrescrita
 ## Etapa 01 — Fatos e pendências
 
 Consulte `docs/validacao-institucional.md`. OBA, olimpíadas e seus respectivos anos/resultados não foram acrescentados como fatos históricos no site: é necessário confirmar o escopo. Endereço e atendimento da unidade de Valinhos ainda estão pendentes.
+
+## Etapa 02 — Funcionalidades e navegação
+
+A branch `preview/v3-6-etapa2-funcionalidades` mantém o layout da V3.5 e acrescenta correções controladas ao formulário (Diadema, Itavuvu, Pannunzio; Valinhos sem canal confirmado), menu móvel, âncoras, carrossel e linha do tempo. Consulte `docs/etapa-02-funcionalidades.md` e `tests/interaction.test.mjs`. Confirmar contatos e realizar homologação no navegador antes de publicar.

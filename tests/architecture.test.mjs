@@ -11,6 +11,7 @@ const preservedModuleHashes = Object.freeze({
   '03-page-components.css': '58b3ace6',
   '05-quality-accessibility.css': 'c6109c23',
   '06-reviewed-fixes.css': '6d6e1dae',
+  '07-design-system.css': '9d99d6bd',
 });
 
 /** FNV-1a over UTF-16 code units; stable across Node versions for this source. */
@@ -31,6 +32,7 @@ test('módulos da Etapa 03 preservados e cascata de produção idêntica ao mani
     '05-quality-accessibility.css',
     '06-reviewed-fixes.css',
     '07-design-system.css',
+    '08-visual-refinement.css',
   ]);
 
   const fragments = await Promise.all(CSS_MODULES.map(async file => ({
@@ -50,7 +52,7 @@ test('módulos da Etapa 03 preservados e cascata de produção idêntica ao mani
   const output = await read('dist/assets/css/site.css');
   assert.equal(output, compiledSource.replace(/url\((['"]?)assets\//g, 'url($1../'));
   assert.ok(output.endsWith(fragments.at(-1).content),
-    'Design System precisa permanecer ao final da cascata');
+    'Refinamento visual precisa permanecer ao final da cascata');
 });
 
 test('páginas continuam geradas em 6 arquivos independentes', async () => {

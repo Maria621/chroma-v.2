@@ -69,13 +69,22 @@ try:
      pg.locator('.v33-gallery-dots button').nth(3).click();d['carousel']['click4']=pg.locator('.gallery-count').inner_text();d['carousel']['dotRect']=pg.locator('.v33-gallery-dots button').first.bounding_box()
      pg.locator('.gallery-slide.is-active .media-zoom-button').click();d['lightboxOpen']=pg.locator('dialog.v32-art-dialog').evaluate('(d)=>d.open');pg.keyboard.press('Escape');d['lightboxClosed']=not pg.locator('dialog.v32-art-dialog').evaluate('(d)=>d.open')
     if page=='index' and w==390:
-     pg.locator('.menu-toggle').click();d['mobileOpened']=pg.locator('.menu-toggle').get_attribute('aria-expanded');d['mobileVisible']=pg.locator('.mobile-nav').is_visible();pg.keyboard.press('Escape');d['mobileClosed']=pg.locator('.menu-toggle').get_attribute('aria-expanded')
+     pg.locator('.menu-toggle').click();d['mobileOpened']=pg.locator('.menu-toggle').get_attribute('aria-expanded');d['mobileVisible']=pg.locator('.mobile-nav').is_visible();d['mobileMainInert']=pg.locator('main').evaluate('(e)=>e.inert');pg.keyboard.press('Escape');d['mobileClosed']=pg.locator('.menu-toggle').get_attribute('aria-expanded');d['mainRestored']=not pg.locator('main').evaluate('(e)=>e.inert')
     if page=='a-chroma' and w==1440:
-     pg.locator('.timeline-widget [role="tab"]').nth(1).click();d['timelineSecond']=pg.locator('.timeline-date').inner_text();pg.locator('.tm-next').click();d['timelineNext']=pg.locator('.timeline-date').inner_text()
+     pg.locator('.timeline-widget [role="tab"]').nth(1).click();d['timelineSecond']=pg.locator('.timeline-date').inner_text();d['timelinePanelLabel']=pg.locator('#tm-panel').get_attribute('aria-labelledby');d['timelineActiveTab']=pg.locator('.timeline-widget [aria-selected="true"]').get_attribute('id');pg.locator('.tm-next').click();d['timelineNext']=pg.locator('.timeline-date').inner_text()
     if page=='unidades' and w==1440:
      pg.locator('.v3-unit .v33-copy-address').first.click();d['unitCopyTest']=pg.locator('.v33-toast').inner_text();d['visitColor']=pg.locator('.v32-visit-section h2').evaluate('(e)=>getComputedStyle(e).color');d['visitEmColor']=pg.locator('.v32-visit-section h2 em').evaluate('(e)=>getComputedStyle(e).color');d['visitBg']=pg.locator('.v32-visit-section').evaluate('(e)=>getComputedStyle(e).backgroundImage')
     if page=='contato' and w==1440:
      d['contactCta']=pg.locator('.v3-sub-hero .v3-btn').first.get_attribute('href');d['formFound']=pg.locator('#chromaContactForm').count()>0
+     d['valinhosDisabled']=pg.locator('#contactUnit option[value="valinhos"]').is_disabled()
+     pg.evaluate('window.open = (href) => { window.__qaContactHref = href; return null; }')
+     pg.locator('#contactUnit').select_option('pannunzio')
+     pg.locator('#contactName').fill('Pessoa QA')
+     pg.locator('#contactMessage').fill('Gostaria de conhecer a unidade.')
+     pg.locator('#chromaContactForm button[type="submit"]').click()
+     d['pannunzioHref']=pg.evaluate('window.__qaContactHref')
+     d['whatsappFallbackVisible']=pg.locator('#whatsappFallback').is_visible()
+     d['contactStatusVisible']=pg.locator('#contactStatus').is_visible()
     res.append(d)
     print(f'{page:22} {w:4} width_errors:{len(d["overflow"])} broken:{len(d["brokenImages"])} js:{len(errors)} badbuttons:{len(d["buttons"])} http:{len(status)}')
     pg.close()

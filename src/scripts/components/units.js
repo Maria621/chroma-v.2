@@ -18,8 +18,11 @@ export function initUnitActions() {
       const text=address.textContent.trim();let copied=false;
       try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true;}}catch{}
       if(!copied){
+        const priorFocus=document.activeElement;
         const textarea=document.createElement('textarea');textarea.value=text;textarea.style.cssText='position:fixed;opacity:0;top:-100px';document.body.append(textarea);textarea.focus();textarea.select();
-        try{copied=document.execCommand('copy')}catch{}textarea.remove();
+        try{copied=document.execCommand('copy')}catch{}
+        textarea.remove();
+        if(priorFocus?.isConnected)priorFocus.focus();
       }
       notify(copied?'Endereço copiado.':'Não foi possível copiar. Selecione o endereço exibido no cartão.');
     });

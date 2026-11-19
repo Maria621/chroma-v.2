@@ -1032,3 +1032,20 @@ html { scroll-padding-top: 108px; }
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* O link manual é oferecido depois de preparar uma mensagem no WhatsApp. */
+.chroma-v3 #whatsappFallback {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 11px 16px;
+  margin-top: 12px;
+  border: 1px solid #c7dced;
+  border-radius: 8px;
+  background: #eef6fc;
+  color: #09528b;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.chroma-v3 #whatsappFallback[hidden] { display: none; }

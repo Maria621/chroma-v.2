@@ -78,6 +78,39 @@ try:
      errors.append('Fonte do corpo não é Poppins')
     if 'Montserrat' not in d['typography']['headingFamily']:
      errors.append('Fonte de título não é Montserrat')
+    d['visualMedia']=pg.evaluate("""() => {
+      const get = selector => document.querySelector(selector);
+      const hero = get('.v3-hero');
+      const heroPhoto = get('.v3-home-hero .v3-hero-photo');
+      const photo = get('.v3-photo img');
+      const unit = get('.v3-unit .v32-unit-image img');
+      const campaign = get('.v3-update-grid .v3-update-img img');
+      const footer = get('.site-footer');
+      const photoFit = element => element ? getComputedStyle(element).objectFit : null;
+      const rect = element => element ? element.getBoundingClientRect() : null;
+      const heroRect = rect(hero);
+      const contentRect = rect(get('.v3-hero-content'));
+      const footerRect = rect(footer);
+      return {
+        heroHeight: heroRect ? Math.round(heroRect.height) : null,
+        heroContainsText: !heroRect || !contentRect || (contentRect.top >= heroRect.top-2 && contentRect.bottom <= heroRect.bottom+2),
+        heroPhotoFit: photoFit(heroPhoto),
+        institutionalPhotoFit: photoFit(photo),
+        unitPhotoFit: photoFit(unit),
+        campaignFit: photoFit(campaign),
+        footerWidth: footerRect ? Math.round(footerRect.width) : null,
+        viewportWidth: innerWidth,
+      };
+    }""")
+    media=d['visualMedia']
+    if page=='index' and media['heroPhotoFit']!='contain':
+     errors.append('Imagem principal deve ser exibida inteira')
+    if page=='unidades' and media['unitPhotoFit']!='contain':
+     errors.append('Imagem da unidade está sujeita a recorte')
+    if page=='index' and media['campaignFit']!='contain':
+     errors.append('Campanha está sujeita a recorte')
+    if not media['heroContainsText']:
+     errors.append('Conteúdo do hero fora de seus limites')
     d.update({'page':page,'width':w,'errors':errors,'httpErrors':status})
     if w in (390,1440):
      pg.screenshot(path=str(out/f'{page}-{w}.png'),full_page=True)

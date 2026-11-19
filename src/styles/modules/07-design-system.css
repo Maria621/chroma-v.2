@@ -1,0 +1,107 @@
+/**
+ * Design System — Instituto Chroma V3.6 / Etapa 04
+ * Regras tipográficas e tokens acessíveis. Preserva o layout e a direção de arte da V3.5.
+ * Regra de manutenção: novas decisões de tipografia e cor devem utilizar estes tokens;
+ * evitar novas classes com sufixos de versão ou modificadores !important.
+ */
+
+:root {
+  /* Famílias já carregadas pelas seis páginas; nenhuma requisição de fonte adicional. */
+  --ds-font-display: "Montserrat", Arial, sans-serif;
+  --ds-font-body: "Poppins", Arial, sans-serif;
+
+  /* Compatibilidade com componentes do CSS original, que ainda usam --font e --body. */
+  --font: var(--ds-font-display);
+  --body: var(--ds-font-body);
+
+  /* Sistema de tamanhos: não redefine os heróis e títulos editoriais aprovados. */
+  --ds-type-body: clamp(.94rem, 1.06vw, 1.04rem);
+  --ds-type-card: .875rem;
+  --ds-type-caption: .875rem;
+  --ds-type-small: .75rem;
+  --ds-type-eyebrow: .6875rem;
+  --ds-leading-body: 1.72;
+  --ds-leading-support: 1.6;
+
+  /* Cores: azul dominante, superfície clara e amarelo como acento. */
+  --ds-brand: #085aab;
+  --ds-brand-deep: #1c6399;
+  --ds-accent: #ffdc28;
+  --ds-text: #102a48;
+  --ds-muted-text: #52667d;
+  --ds-surface: #ffffff;
+  --ds-surface-soft: #f4f8fc;
+  --ds-border: #d6e2ee;
+
+  /* Ritmo e formas. Novos componentes devem reutilizar estas medidas. */
+  --ds-space-1: .25rem;
+  --ds-space-2: .5rem;
+  --ds-space-3: .75rem;
+  --ds-space-4: 1rem;
+  --ds-space-5: 1.5rem;
+  --ds-space-6: 2rem;
+  --ds-radius-control: .5rem;
+  --ds-radius-card: .75rem;
+  --ds-focus-ring: #ffce00;
+  --ds-min-touch: 44px;
+}
+
+/* Unifica as fontes existentes; mantém os tamanhos e pesos definidos nos componentes. */
+body.chroma-v3 {
+  font-family: var(--ds-font-body);
+}
+.chroma-v3 :is(h1, h2, h3, .desktop-nav, .v3-btn, .header-cta) {
+  font-family: var(--ds-font-display);
+}
+.chroma-v3 :is(input, textarea, select) {
+  font-family: var(--ds-font-body);
+}
+
+/* Pequenos textos funcionais: contraste AA e dimensões consistentes. */
+.chroma-v3 .v3-whatsapp-form label {
+  font-size: var(--ds-type-small);
+}
+.chroma-v3 .v3-whatsapp-form small {
+  font-size: var(--ds-type-small);
+  line-height: var(--ds-leading-support);
+  color: var(--ds-muted-text);
+}
+.chroma-v3 .v3-whatsapp-form :is(input, textarea)::placeholder {
+  color: var(--ds-muted-text);
+  opacity: 1;
+}
+.chroma-v3 .v3-unit dt {
+  color: var(--ds-muted-text);
+  font-size: var(--ds-type-small);
+}
+.chroma-v3 .v3-unit-number {
+  color: var(--ds-brand-deep);
+  font-size: var(--ds-type-eyebrow);
+}
+.chroma-v3 .v3-unit p {
+  font-size: var(--ds-type-card);
+  line-height: 1.65;
+}
+.chroma-v3 .v3-story-meta {
+  color: var(--ds-muted-text);
+  font-size: var(--ds-type-small);
+}
+.chroma-v3 .v3-note,
+.chroma-v3 .v3-source {
+  color: var(--ds-muted-text);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-leading-support);
+}
+.chroma-v33 .timeline-axis button span {
+  font-size: var(--ds-type-small);
+}
+.chroma-v34 .site-footer.v34-footer .v34-footer-bottom {
+  color: var(--ds-muted-text);
+  font-size: var(--ds-type-small);
+  line-height: var(--ds-leading-support);
+}
+
+/* Palavras longas não podem atravessar o contêiner sem forçar quebra em palavras comuns. */
+.chroma-v3 :is(h1, h2, h3, .v3-unit p, .v3-note, .v3-source) {
+  overflow-wrap: break-word;
+}

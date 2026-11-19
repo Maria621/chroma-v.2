@@ -1015,3 +1015,20 @@ html{scroll-padding-top:100px}body{overflow-wrap:break-word}a,button,input,selec
 .chroma-v3 .unit-expansion p{margin:0;max-width:65ch;font-size:14px;line-height:1.65;color:#435a71}
 .chroma-v3 .unit-expansion .v3-link{white-space:nowrap;justify-self:end}
 @media(max-width:900px){.chroma-v3 .unit-expansion{grid-template-columns:1fr;gap:12px}.chroma-v3 .unit-expansion .v3-link{justify-self:start;white-space:normal}}
+
+/* Etapa 02 — âncoras visíveis abaixo do cabeçalho sticky; layout preservado. */
+html { scroll-padding-top: 108px; }
+@media (max-width: 1000px) { html { scroll-padding-top: 88px; } }
+@media (max-width: 760px) { html { scroll-padding-top: 80px; } }
+.chroma-v3 .v3-whatsapp-form #contactStatus {
+  margin: 12px 0 0;
+  color: #18486c;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.chroma-v3 .v3-whatsapp-form #contactStatus[hidden] { display: none; }
+.chroma-v3 .v3-whatsapp-form .v3-note a {
+  color: #085a9e;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

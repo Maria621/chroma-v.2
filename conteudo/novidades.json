@@ -1,0 +1,29 @@
+{
+  "observacao": "As artes são reproduzidas integralmente. Edite apenas informações confirmadas pela escola.",
+  "campanhas": [
+    {
+      "slot": "principal",
+      "titulo": "Presença Premiada",
+      "tipo": "CAMPANHA · 2026",
+      "resumo": "Uma iniciativa que incentiva a participação e a frequência dos estudantes.",
+      "imagem": "assets/campanha-presenca-premiada.webp",
+      "alt": "Arte oficial da campanha Presença Premiada da Chroma"
+    },
+    {
+      "slot": "lateral-1",
+      "titulo": "Consciência Negra",
+      "tipo": "COMUNICADO · 20 NOV",
+      "resumo": "Um comunicado institucional e um convite à reflexão.",
+      "imagem": "assets/campanha-consciencia-negra-2026.webp",
+      "alt": "Arte oficial do comunicado de 20 de novembro"
+    },
+    {
+      "slot": "lateral-2",
+      "titulo": "Novidades de Natal",
+      "tipo": "NOVIDADES · FIM DE ANO",
+      "resumo": "A Chroma prepara novidades para a temporada de fim de ano.",
+      "imagem": "assets/chroma-novidades-horizontal.webp",
+      "alt": "Banner oficial da Chroma de novidades natalinas"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+Escola Chroma — V2
+
+Abra index.html para navegar. Leia README.md para alterações e pendências antes da publicação.

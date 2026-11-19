@@ -14,7 +14,9 @@ export function initCarousel() {
   document.querySelector('.gallery-side')?.append(dots);
   const progress = document.createElement('div');
   progress.className = 'v33-slide-progress';
-  const bar = document.createElement('span'); progress.append(bar); gallery.append(progress);
+  const bar = document.createElement('span');
+  bar.style.width = `${100 / slides.length}%`;
+  progress.append(bar); gallery.append(progress);
   const select = (value, focus = false) => {
     index = (value+slides.length) % slides.length;
     slides.forEach((slide,i) => {

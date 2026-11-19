@@ -1,0 +1,40 @@
+/* Etapa 01: marcos históricos confirmados, sem modificar os cartões das unidades existentes. */
+.chroma-v3 .unit-expansion{display:grid;grid-template-columns:minmax(150px,.65fr) 1.6fr auto;align-items:center;gap:24px;margin-top:20px;padding:26px 28px;border:1px solid #cedfed;border-left:4px solid #0d69ae;background:#fff}
+.chroma-v3 .unit-expansion h3{font:800 clamp(22px,2.4vw,28px)/1.2 Montserrat,sans-serif;color:#0a2c54;margin:8px 0 0}
+.chroma-v3 .unit-expansion p{margin:0;max-width:65ch;font-size:14px;line-height:1.65;color:#435a71}
+.chroma-v3 .unit-expansion .v3-link{white-space:nowrap;justify-self:end}
+@media(max-width:900px){.chroma-v3 .unit-expansion{grid-template-columns:1fr;gap:12px}.chroma-v3 .unit-expansion .v3-link{justify-self:start;white-space:normal}}
+
+/* Etapa 02 — âncoras visíveis abaixo do cabeçalho sticky; layout preservado. */
+html { scroll-padding-top: 108px; }
+@media (max-width: 1000px) { html { scroll-padding-top: 88px; } }
+@media (max-width: 760px) { html { scroll-padding-top: 80px; } }
+.chroma-v3 .v3-whatsapp-form #contactStatus {
+  margin: 12px 0 0;
+  color: #18486c;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.chroma-v3 .v3-whatsapp-form #contactStatus[hidden] { display: none; }
+.chroma-v3 .v3-whatsapp-form .v3-note a {
+  color: #085a9e;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* O link manual é oferecido depois de preparar uma mensagem no WhatsApp. */
+.chroma-v3 #whatsappFallback {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 11px 16px;
+  margin-top: 12px;
+  border: 1px solid #c7dced;
+  border-radius: 8px;
+  background: #eef6fc;
+  color: #09528b;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.chroma-v3 #whatsappFallback[hidden] { display: none; }

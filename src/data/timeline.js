@@ -1,9 +1,31 @@
-/** História editorial provisória — revisão factual exigida antes de produção. */
+/** Marcos institucionais informados pela equipe Chroma; outros acontecimentos aguardam validação. */
 export const timelineData = [
-  {year:'2016',date:'2016 · O INÍCIO',title:'Uma ideia guiada pelo potencial das pessoas.',description:'O primeiro capítulo desta narrativa nasce de uma convicção: o conhecimento pode transformar expectativas em possibilidades. O propósito é construir uma escola em que cada aluno tenha espaço para crescer.',graphic:['UM NOVO','COMEÇO']},
-  {year:'2018',date:'2018 · NOVOS CAMINHOS',title:'O conhecimento começa a ganhar novas formas.',description:'A proposta educacional amplia seu olhar para tecnologia, idiomas e desenvolvimento de competências, buscando aproximar estudo, curiosidade e autonomia.',graphic:['EXPANDIR','HORIZONTES']},
-  {year:'2020',date:'2020 · CAPACIDADE DE REINVENTAR',title:'Aprender também é adaptar-se.',description:'Em uma década marcada por mudanças na educação e na tecnologia, a capacidade de buscar novos caminhos reforça a importância de experiências flexíveis e de acompanhamento.',graphic:['SEGUIR','APRENDENDO']},
-  {year:'2022',date:'2022 · APRENDIZAGEM ATIVA',title:'Da explicação à prática em cada etapa.',description:'O aluno estuda conteúdos, experimenta ferramentas, fixa conhecimentos e, com o professor, coloca as ideias em ação na lousa e no computador.',graphic:['PRÁTICA','E EVOLUÇÃO']},
-  {year:'2024',date:'2024 · CONEXÕES COM A COMUNIDADE',title:'A educação faz mais quando aproxima pessoas.',description:'A narrativa da Chroma passa a destacar o reconhecimento ao esforço, o trabalho colaborativo e as oportunidades de conexão com escolas e famílias.',graphic:['CONEXÕES','QUE IMPORTAM']},
-  {year:'2026',date:'2026 · UMA DÉCADA EM CONSTRUÇÃO',title:'Novas iniciativas, o mesmo compromisso.',description:'Projetos como o Aluno Nota 10, a Nexus Corp e as atividades aplicadas ajudam a mostrar uma proposta que incentiva o protagonismo, a participação e a criação de novas possibilidades.',graphic:['PRÓXIMOS','CAPÍTULOS']},
+  {
+    year:'2016',
+    date:'2016 · FUNDAÇÃO EM DIADEMA',
+    title:'O início do Instituto Chroma.',
+    description:'Fundado por Adriana, em Diadema, o Instituto Chroma nasceu com o propósito de ampliar oportunidades educacionais para crianças e adolescentes.',
+    graphic:['O PRIMEIRO','PASSO']
+  },
+  {
+    year:'2019',
+    date:'2019 · UNIDADE ITAVUVU',
+    title:'A Chroma chega à Itavuvu, em Sorocaba.',
+    description:'A trajetória de expansão ganha um novo marco com a unidade Itavuvu, em Sorocaba, inaugurada em 2019.',
+    graphic:['NOVOS','CAMINHOS']
+  },
+  {
+    year:'2022',
+    date:'2022 · UNIDADE PANNUNZIO',
+    title:'Uma nova etapa em Sorocaba.',
+    description:'Em 2022, a unidade Pannunzio marca mais uma etapa da presença do Instituto Chroma em Sorocaba.',
+    graphic:['MAIS','CONEXÕES']
+  },
+  {
+    year:'2026',
+    date:'2026 · UNIDADE VALINHOS',
+    title:'Dez anos de história e presença em Valinhos.',
+    description:'Em 2026, ano em que completa uma década de trajetória, o Instituto Chroma amplia sua presença com a unidade de Valinhos.',
+    graphic:['10 ANOS','DE CHROMA']
+  },
 ];

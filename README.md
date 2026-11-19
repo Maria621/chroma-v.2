@@ -1,6 +1,6 @@
-# Instituto Chroma — site institucional V3.5
+# Instituto Chroma — site institucional V3.6 (Etapa 01)
 
-Site institucional multipágina da Chroma. Esta versão consolida a V3.4 sem alterar os textos institucionais aprovados. A publicação é feita a partir de HTML estático, com componentes reutilizáveis e JavaScript modular.
+Evolução editorial controlada da V3.5: marcos históricos de unidades confirmados, identidade institucional padronizada e pendências separadas para validação. O layout e as interações aprovados foram preservados. A publicação permanece estática, com componentes reutilizáveis e JavaScript modular.
 
 ## Estrutura
 
@@ -8,10 +8,12 @@ Site institucional multipágina da Chroma. Esta versão consolida a V3.4 sem alt
 - `src/partials/`: cabeçalho e rodapé únicos, reutilizados no build.
 - `src/styles/site.css`: **única fonte de CSS** (CSS de versões anteriores consolidado e regras não utilizadas removidas; tokens e ajustes de acessibilidade no final). Não criar novos arquivos `v36.css`, `v37.css` etc.
 - `src/scripts/components/`: navegação, carrossel, linha do tempo, lightbox, unidades, contato e notícias com responsabilidades separadas.
-- `src/data/timeline.js`: dados da linha do tempo editorial.
+- `src/data/timeline.js`: somente os quatro marcos de unidades informados pela equipe (2016, 2019, 2022, 2026).
+- `docs/validacao-institucional.md`: fatos confirmados, registros legados e pendências.
 - `assets/` e `conteudo/`: imagens oficiais, artes ilustrativas e registro estático das campanhas já existentes no repositório. No ZIP, há cópias sob `public/` para montar o build de forma independente.
 - `scripts/build.mjs`: compilador sem dependências externas que une os parciais e produz `dist/`.
 - `tests/project.test.mjs`: testes de referências internas, integridade de recursos, estrutura, CTA e contrastes críticos.
+- `tests/institutional.test.mjs`: testes de regressão para os marcos, a identidade e Valinhos.
 - `tests/visual_qa.py`: roteiro de QA visual e funcional local para Chromium + Playwright, sem depender de um domínio público.
 
 ## Executar
@@ -33,8 +35,12 @@ O roteiro `python3 tests/visual_qa.py` exige Python, Playwright e Chromium. É u
 
 1. **Não alterar conteúdos aprovados** durante mudanças de layout ou de estrutura. Revisões editoriais exigem aprovação específica.
 2. Atualizar componentes no `src/`, executar `npm run build`, `npm test` e uma rodada visual antes de atualizar a prévia.
-3. Não colocar dados fictícios de histórico ou fotos ilustrativas como registros documentais. A cronologia é editorial provisória, e imagens sintéticas de unidades e salas devem continuar identificadas como ilustrativas até a chegada de fotografias reais autorizadas.
+3. Não colocar dados fictícios de histórico ou fotos ilustrativas como registros documentais. A cronologia apresenta somente os quatro marcos de unidades informados pela equipe; outros anos estão pendentes. Imagens sintéticas de unidades e salas devem continuar identificadas como ilustrativas até a chegada de fotografias reais autorizadas.
 4. A página Contato apenas **prepara uma mensagem para o WhatsApp**: o envio depende da confirmação do visitante no aplicativo. Não há envio de e-mail em servidor.
 5. As páginas de prévia têm `noindex,nofollow`; isso deve ser revisto junto com SEO, política de privacidade e informações oficiais antes de produção.
 
 A produção V2.2 e as versões de prévia anteriores não devem ser sobrescritas sem aprovação explícita.
+
+## Etapa 01 — Fatos e pendências
+
+Consulte `docs/validacao-institucional.md`. OBA, olimpíadas e seus respectivos anos/resultados não foram acrescentados como fatos históricos no site: é necessário confirmar o escopo. Endereço e atendimento da unidade de Valinhos ainda estão pendentes.

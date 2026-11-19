@@ -19,3 +19,8 @@ Leia `VALIDACAO_EDITORIAL_V3.md` e `HISTORIA_EDITORA_PROVISORIA.md`. As imagens 
 
 ## Arquivos
 `index.html`, `a-chroma.html`, `nosso-trabalho.html`, `projetos-e-parcerias.html`, `unidades.html`, `contato.html`, `styles.css`, `v3.css`, `site.js`, `conteudo/novidades.json` e `assets/`.
+
+
+## Revisão 3.2
+
+A cronologia 2016–2026 é uma **proposta narrativa editorial**, não um registro documental ano a ano. Validar os marcos com a direção antes de promover à produção. As fachadas, a cena de metodologia e a reunião de parceria são imagens ilustrativas geradas por IA e não devem ser identificadas como fotos de unidades físicas ou eventos reais. As duas unidades de Sorocaba usam o mesmo telefone e WhatsApp conforme instrução da equipe.

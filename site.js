@@ -34,10 +34,12 @@
     show(0);
   }
   const timelineData=[
-    {date:'UMA IDEIA',title:'Todo potencial merece ser descoberto.',description:'O propósito de despertar habilidades e ampliar horizontes orienta a narrativa institucional da Chroma.',graphic:'O PRIMEIRO<br>PASSO',year:'CHROMA'},
-    {date:'APRENDER FAZENDO',title:'O conhecimento ganha sentido na prática.',description:'Tecnologia, idiomas e formação profissional se conectam à metodologia de estudo, fixação e projetos orientados.',graphic:'ESTUDAR.<br>CRIAR.',year:'CHROMA'},
-    {date:'MAIS CONEXÕES',title:'A educação se aproxima da comunidade.',description:'Iniciativas como o Aluno Nota 10 reforçam o incentivo ao esforço escolar e a aproximação com escolas públicas.',graphic:'ESCOLAS.<br>PESSOAS.',year:'CHROMA'},
-    {date:'O QUE VEM PELA FRENTE',title:'A próxima história também é construída pelo aluno.',description:'Novos projetos, repertórios e experiências continuam fazendo parte da proposta educacional da instituição.',graphic:'SEGUIR.<br>EVOLUIR.',year:'CHROMA'}
+    {date:'2016 · O INÍCIO',title:'Uma ideia guiada pelo potencial das pessoas.',description:'O primeiro capítulo desta narrativa nasce de uma convicção: o conhecimento pode transformar expectativas em possibilidades. O propósito é construir uma escola em que cada aluno tenha espaço para crescer.',graphic:'UM NOVO<br>COMEÇO',year:'2016'},
+    {date:'2018 · NOVOS CAMINHOS',title:'O conhecimento começa a ganhar novas formas.',description:'A proposta educacional amplia seu olhar para tecnologia, idiomas e desenvolvimento de competências, buscando aproximar estudo, curiosidade e autonomia.',graphic:'EXPANDIR<br>HORIZONTES',year:'2018'},
+    {date:'2020 · CAPACIDADE DE REINVENTAR',title:'Aprender também é adaptar-se.',description:'Em uma década marcada por mudanças na educação e na tecnologia, a capacidade de buscar novos caminhos reforça a importância de experiências flexíveis e de acompanhamento.',graphic:'SEGUIR<br>APRENDENDO',year:'2020'},
+    {date:'2022 · APRENDIZAGEM ATIVA',title:'Da explicação à prática em cada etapa.',description:'O aluno estuda conteúdos, experimenta ferramentas, fixa conhecimentos e, com o professor, coloca as ideias em ação na lousa e no computador.',graphic:'PRÁTICA<br>E EVOLUÇÃO',year:'2022'},
+    {date:'2024 · CONEXÕES COM A COMUNIDADE',title:'A educação faz mais quando aproxima pessoas.',description:'A narrativa da Chroma passa a destacar o reconhecimento ao esforço, o trabalho colaborativo e as oportunidades de conexão com escolas e famílias.',graphic:'CONEXÕES<br>QUE IMPORTAM',year:'2024'},
+    {date:'2026 · UMA DÉCADA EM CONSTRUÇÃO',title:'Novas iniciativas, o mesmo compromisso.',description:'Projetos como o Aluno Nota 10, a Nexus Corp e as atividades aplicadas ajudam a mostrar uma proposta que incentiva o protagonismo, a participação e a criação de novas possibilidades.',graphic:'PRÓXIMOS<br>CAPÍTULOS',year:'2026'}
   ];
   const timeline=document.querySelector('.timeline-widget');
   if(timeline){
@@ -51,7 +53,7 @@
       panel.querySelector('.timeline-date').textContent=d.date;
       panel.querySelector('h3').textContent=d.title;
       panel.querySelector('.timeline-content p').textContent=d.description;
-      panel.querySelector('.tm-counter').textContent=String(current+1).padStart(2,'0')+' / 04';
+      panel.querySelector('.tm-counter').textContent=String(current+1).padStart(2,'0')+' / '+String(timelineData.length).padStart(2,'0');
       const visual=panel.querySelector('.timeline-visual');
       visual.replaceChildren();
       const graphic=document.createElement('div');
@@ -113,3 +115,14 @@ const msg=['Olá, equipe Chroma!','Meu nome: '+el('contactName').value.trim(),'U
 const href='https://wa.me/'+number+'?text='+encodeURIComponent(msg);
 window.open(href,'_blank','noopener,noreferrer');
 });})();
+
+/* V3.2 — ampliar campanhas sem distorcer nem redesenhar as artes oficiais. */
+(()=>{
+ const images=[...document.querySelectorAll('.v3-update-img img,.v32-seasonal-banner img')];
+ if(!images.length)return;
+ const modal=document.createElement('dialog');modal.className='v32-art-dialog';modal.setAttribute('aria-label','Visualização ampliada da arte oficial');
+ modal.innerHTML='<button class="v32-art-close" type="button" aria-label="Fechar imagem ampliada">×</button><img alt="" src="">';document.body.append(modal);
+ const close=()=>modal.close();modal.querySelector('button').addEventListener('click',close);
+ modal.addEventListener('click',e=>{if(e.target===modal)close()});
+ images.forEach(img=>{img.style.cursor='zoom-in';img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','Ampliar arte: '+img.alt);const open=()=>{let m=modal.querySelector('img');m.src=img.src;m.alt=img.alt;modal.showModal()};img.addEventListener('click',open);img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});
+})();

@@ -592,7 +592,7 @@ body.chroma-v3{font-family:"Poppins",Arial,sans-serif;background:#fff;color:var(
 .chroma-v3 .v32-step-icons span{font:800 10px Montserrat,sans-serif;letter-spacing:.08em;border:1px solid #ffffff50;border-radius:50px;padding:10px 13px;color:white}
 .chroma-v3 .v32-step-icons .v32-step-arrow{border:0;color:#ffe816;padding:0}
 .chroma-v3 .v32-timeline-header>p{max-width:320px}
-.chroma-v3 .v3-timeline-wrap .timeline-axis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0}
+.chroma-v3 .v3-timeline-wrap .timeline-axis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
 .chroma-v3 .v3-timeline-wrap .timeline-axis button{min-width:0;overflow-wrap:anywhere}
 .chroma-v3 .v3-timeline-wrap .timeline-axis button b{font-size:21px}
 .chroma-v3 .v3-timeline-wrap .timeline-axis button span{font-size:11px}
@@ -754,7 +754,7 @@ body.chroma-v3{font-family:"Poppins",Arial,sans-serif;background:#fff;color:var(
 .chroma-v33 .v32-seasonal-banner:hover img{transform:scale(1.015)}
 .chroma-v33 .v3-timeline-wrap{background:#f2f6fb}
 .chroma-v33 .timeline-widget{margin-top:44px}
-.chroma-v33 .timeline-axis{border:0;position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;padding-top:4px;margin-bottom:24px}
+.chroma-v33 .timeline-axis{border:0;position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding-top:4px;margin-bottom:24px}
 .chroma-v33 .timeline-axis:before{content:"";position:absolute;top:7px;left:0;right:0;height:3px;background:#c6d9ec;border-radius:2px}
 .chroma-v33 .timeline-axis:after{content:"";position:absolute;top:7px;left:0;width:var(--v33-progress,0%);height:3px;background:linear-gradient(90deg,#0877c1,#ffdc28);transition:width .48s var(--c33-ease);border-radius:3px}
 .chroma-v33 .timeline-axis button{min-width:0;background:transparent;border:0;position:relative;text-align:left;padding:36px 10px 16px 0;transition:color .2s}
@@ -891,7 +891,7 @@ body.chroma-v3{font-family:"Poppins",Arial,sans-serif;background:#fff;color:var(
 .chroma-v33 .v3-update-grid{grid-template-columns:1fr}
 .chroma-v33 .v3-update-grid article{width:100%}
 .chroma-v33 .v3-photo img{aspect-ratio:1.55}
-.chroma-v33 .timeline-axis{overflow-x:auto;grid-template-columns:repeat(6,120px);padding-bottom:6px;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin}
+.chroma-v33 .timeline-axis{overflow-x:auto;grid-template-columns:repeat(4,120px);padding-bottom:6px;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin}
 .chroma-v33 .timeline-axis button{scroll-snap-align:start}
 .chroma-v33 .timeline-content{padding:30px}
 .chroma-v33 .timeline-detail{grid-template-columns:1fr}
@@ -1008,3 +1008,10 @@ html{scroll-padding-top:100px}body{overflow-wrap:break-word}a,button,input,selec
 @media(max-width:760px){.chroma-v3 .v32-visit>div:first-child{padding:30px 24px}}
 /* Elementos circulares de apoio devem permanecer dentro dos cartões no celular. */
 .chroma-v3 .v32-event-visual{overflow:hidden}
+
+/* Etapa 01: marcos históricos confirmados, sem modificar os cartões das unidades existentes. */
+.chroma-v3 .unit-expansion{display:grid;grid-template-columns:minmax(150px,.65fr) 1.6fr auto;align-items:center;gap:24px;margin-top:20px;padding:26px 28px;border:1px solid #cedfed;border-left:4px solid #0d69ae;background:#fff}
+.chroma-v3 .unit-expansion h3{font:800 clamp(22px,2.4vw,28px)/1.2 Montserrat,sans-serif;color:#0a2c54;margin:8px 0 0}
+.chroma-v3 .unit-expansion p{margin:0;max-width:65ch;font-size:14px;line-height:1.65;color:#435a71}
+.chroma-v3 .unit-expansion .v3-link{white-space:nowrap;justify-self:end}
+@media(max-width:900px){.chroma-v3 .unit-expansion{grid-template-columns:1fr;gap:12px}.chroma-v3 .unit-expansion .v3-link{justify-self:start;white-space:normal}}

@@ -6,7 +6,7 @@ Evolução editorial controlada da V3.5: marcos históricos de unidades confirma
 
 - `src/pages/`: conteúdo HTML original de cada uma das seis páginas, com marcações para o cabeçalho/rodapé compartilhados.
 - `src/partials/`: cabeçalho e rodapé únicos, reutilizados no build.
-- `src/styles/site.css`: **única fonte de CSS** (CSS de versões anteriores consolidado e regras não utilizadas removidas; tokens e ajustes de acessibilidade no final). Não criar novos arquivos `v36.css`, `v37.css` etc.
+- `src/styles/modules/`: **seis módulos CSS de origem**, mantidos na ordem de `src/styles/manifest.mjs`; o build concatena um único `dist/assets/css/site.css`. Consulte `src/styles/README.md`.
 - `src/scripts/components/`: navegação, carrossel, linha do tempo, lightbox, unidades, contato e notícias com responsabilidades separadas.
 - `src/data/timeline.js`: somente os quatro marcos de unidades informados pela equipe (2016, 2019, 2022, 2026).
 - `docs/validacao-institucional.md`: fatos confirmados, registros legados e pendências.
@@ -48,3 +48,7 @@ Consulte `docs/validacao-institucional.md`. OBA, olimpíadas e seus respectivos 
 ## Etapa 02 — Funcionalidades e navegação
 
 A branch `preview/v3-6-etapa2-funcionalidades` mantém o layout da V3.5 e acrescenta correções controladas ao formulário (Diadema, Itavuvu, Pannunzio; Valinhos sem canal confirmado), menu móvel, âncoras, carrossel e linha do tempo. Consulte `docs/etapa-02-funcionalidades.md` e `tests/interaction.test.mjs`. Confirmar contatos e realizar homologação no navegador antes de publicar.
+
+## Etapa 03 — Arquitetura modular
+
+HTML formatado nas seis páginas, build de CSS modular e verificação de equivalência de saída em `tests/architecture.test.mjs`. As regras CSS de produção foram preservadas sem alteração. Consulte `docs/etapa-03-arquitetura.md`.

@@ -92,6 +92,11 @@ body.chroma-v3 {
   font-size: var(--ds-type-caption);
   line-height: var(--ds-leading-support);
 }
+.chroma-v33 .v3-photo figcaption,
+.chroma-v33 .v32-unit-image figcaption {
+  font-size: var(--ds-type-small);
+  line-height: var(--ds-leading-support);
+}
 .chroma-v33 .timeline-axis button span {
   font-size: var(--ds-type-small);
 }

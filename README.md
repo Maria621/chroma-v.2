@@ -1,4 +1,4 @@
-# Instituto Chroma — site institucional V3.6 (Etapas 01–04)
+# Instituto Chroma — site institucional V3.6 (Etapas 01–05)
 
 Evolução editorial controlada da V3.5: marcos históricos de unidades confirmados, identidade institucional padronizada e pendências separadas para validação. O layout e as interações aprovados foram preservados. A publicação permanece estática, com componentes reutilizáveis e JavaScript modular.
 
@@ -6,7 +6,7 @@ Evolução editorial controlada da V3.5: marcos históricos de unidades confirma
 
 - `src/pages/`: conteúdo HTML original de cada uma das seis páginas, com marcações para o cabeçalho/rodapé compartilhados.
 - `src/partials/`: cabeçalho e rodapé únicos, reutilizados no build.
-- `src/styles/modules/`: **sete módulos CSS de origem**, mantidos na ordem de `src/styles/manifest.mjs`; o build concatena um único `dist/assets/css/site.css`. Consulte `src/styles/README.md`.
+- `src/styles/modules/`: **oito módulos CSS de origem**, mantidos na ordem de `src/styles/manifest.mjs`; o build concatena um único `dist/assets/css/site.css`. Consulte `src/styles/README.md`.
 - `src/scripts/components/`: navegação, carrossel, linha do tempo, lightbox, unidades, contato e notícias com responsabilidades separadas.
 - `src/data/timeline.js`: somente os quatro marcos de unidades informados pela equipe (2016, 2019, 2022, 2026).
 - `docs/validacao-institucional.md`: fatos confirmados, registros legados e pendências.
@@ -15,6 +15,7 @@ Evolução editorial controlada da V3.5: marcos históricos de unidades confirma
 - `tests/project.test.mjs`: testes de referências internas, integridade de recursos, estrutura, CTA e contrastes críticos.
 - `tests/institutional.test.mjs`: testes de regressão para os marcos, a identidade e Valinhos.
 - `tests/design-system.test.mjs`: validação de fontes, legibilidade e contraste de tokens WCAG AA.
+- `tests/visual-media.test.mjs`: testes de regressão para proporções de imagens e responsividade do hero e rodapé.
 - `tests/visual_qa.py`: roteiro de QA visual e funcional local para Chromium + Playwright, sem depender de um domínio público.
 
 ## Executar
@@ -57,3 +58,7 @@ HTML formatado nas seis páginas, build de CSS modular e verificação de equiva
 ## Etapa 04 — Design System e tipografia
 
 Montserrat continua nos títulos e elementos de navegação; Poppins permanece nos textos corridos. Tokens centrais foram adicionados no módulo final do CSS, e textos auxiliares com contraste insuficiente foram corrigidos. O hero e o carrossel permanecem como aprovados. Consulte `docs/etapa-04-design-system.md`.
+
+## Etapa 05 — Refinamento visual e imagens
+
+Hero principal mais compacto e com imagem inteira; heros internos revisados, artes ilustrativas e campanhas sem zoom/corte intencional, cartões de unidades padronizados e rodapé compacto responsivo. A identidade original e os conteúdos foram mantidos. Consulte `docs/etapa-05-refino-visual.md`. A inspeção visual real e o aceite da branch atual ainda são necessários.

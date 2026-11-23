@@ -1,12 +1,13 @@
 {
   "name": "instituto-chroma-institucional",
   "private": true,
-  "version": "3.5.0",
+  "version": "3.7.0",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
-    "qa:visual": "python3 tests/visual_qa.py"
+    "qa:visual": "python3 tests/visual_qa.py",
+    "qa:runtime": "python3 tests/runtime_smoke.py"
   },
   "engines": {
     "node": "22.x"

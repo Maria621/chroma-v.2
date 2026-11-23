@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {CSS_MODULES} from '../src/styles/manifest.mjs';
 import {PAGE_SLUGS, getPublishConfig, enhanceHtml, robotsText, sitemapText} from './site-metadata.mjs';
+import {addIntrinsicImageSizes} from './image-dimensions.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = PAGE_SLUGS;
@@ -43,6 +44,13 @@ const [headerTemplate, footer] = await Promise.all([
   read('src/partials/footer.html'),
 ]);
 
+const brandAssets = (await canAccess(path.join(root, 'assets')))
+  ? path.join(root, 'assets')
+  : path.join(root, 'public/assets');
+const contentAssets = (await canAccess(path.join(root, 'conteudo')))
+  ? path.join(root, 'conteudo')
+  : path.join(root, 'public/conteudo');
+
 for (const slug of pages) {
   const filename = `${slug}.html`;
   const source = await read(`src/pages/${filename}`);
@@ -50,18 +58,12 @@ for (const slug of pages) {
     throw new Error(`Placeholder ausente: ${filename}`);
   }
 
-  const html = enhanceHtml(compactHtmlSource(source)
+  const html = await addIntrinsicImageSizes(enhanceHtml(compactHtmlSource(source)
     .replace('<!-- CHROMA_HEADER -->', buildHeader(headerTemplate, filename))
-    .replace('<!-- CHROMA_FOOTER -->', footer), slug, publishConfig);
+    .replace('<!-- CHROMA_FOOTER -->', footer), slug, publishConfig), brandAssets);
   await writeFile(path.join(dist, filename), html, 'utf8');
 }
 
-const brandAssets = (await canAccess(path.join(root, 'assets')))
-  ? path.join(root, 'assets')
-  : path.join(root, 'public/assets');
-const contentAssets = (await canAccess(path.join(root, 'conteudo')))
-  ? path.join(root, 'conteudo')
-  : path.join(root, 'public/conteudo');
 
 await Promise.all([
   cp(brandAssets, path.join(dist, 'assets'), {recursive: true}),

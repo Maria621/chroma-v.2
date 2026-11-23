@@ -3,6 +3,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
+from shutil import which
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +24,9 @@ def require(condition, message):
 
 try:
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True, args=['--no-sandbox'])
+        browser = playwright.chromium.launch(
+            executable_path=which('google-chrome') or which('google-chrome-stable') or which('chromium'),
+            headless=True, args=['--no-sandbox'])
         for slug in PAGES:
             page = browser.new_page(viewport={'width': 1440, 'height': 900}, reduced_motion='reduce')
             errors = []

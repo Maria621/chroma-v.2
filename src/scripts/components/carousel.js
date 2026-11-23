@@ -3,6 +3,7 @@ export function initCarousel() {
   const gallery = document.querySelector('.angled-gallery');
   if (!gallery) return;
   const slides = [...gallery.querySelectorAll('.gallery-slide')];
+  gallery.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight Home End');
   if (!slides.length) return;
   let index = 0;
   const count = document.querySelector('.gallery-count');
@@ -34,7 +35,12 @@ export function initCarousel() {
     if(count) count.textContent = `${String(index+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
   };
   slides.forEach((slide,i) => {
+    slide.id = slide.id || `chroma-gallery-slide-${i+1}`;
+    slide.setAttribute('role', 'group');
+    slide.setAttribute('aria-roledescription', 'imagem');
+    slide.setAttribute('aria-label', `Imagem ${i+1} de ${slides.length}`);
     const dot = document.createElement('button'); dot.type='button';
+    dot.setAttribute('aria-controls', slide.id);
     dot.setAttribute('aria-label',`Ver imagem ${i+1} de ${slides.length}`);
     dot.addEventListener('click', () => select(i));
     dots.append(dot);

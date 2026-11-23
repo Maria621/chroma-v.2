@@ -33,7 +33,7 @@ try:
             page.on('pageerror', lambda err: errors.append(str(err)))
             response = page.goto(BASE + '/' + slug + '.html', wait_until='domcontentloaded', timeout=45000)
             require(response and response.status == 200, slug + ': página indisponível')
-            page.locator('.v33-scrolltop').wait_for(timeout=15000)
+            page.locator('.v33-scrolltop').wait_for(state='attached', timeout=15000)
             require(page.locator('main h1').count() == 1, slug + ': h1 incorreto')
             require(page.locator('header').count() == 1, slug + ': cabeçalho incorreto')
             require(page.locator('footer').count() == 1, slug + ': rodapé incorreto')
@@ -74,7 +74,7 @@ try:
 
         mobile = browser.new_page(viewport={'width': 390, 'height': 844}, reduced_motion='reduce')
         mobile.goto(BASE + '/index.html', wait_until='domcontentloaded', timeout=45000)
-        mobile.locator('.v33-scrolltop').wait_for(timeout=15000)
+        mobile.locator('.v33-scrolltop').wait_for(state='attached', timeout=15000)
         mobile.locator('.menu-toggle').click()
         require(mobile.locator('.mobile-nav').is_visible(), 'Menu móvel não abriu')
         require(mobile.locator('main').evaluate('(e) => e.inert'), 'Conteúdo não está inerte')

@@ -3,16 +3,11 @@ import {readFile, writeFile, mkdir, cp, rm, access} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {CSS_MODULES} from '../src/styles/manifest.mjs';
+import {PAGE_SLUGS, getPublishConfig, enhanceHtml, robotsText, sitemapText} from './site-metadata.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const pages = [
-  'index',
-  'a-chroma',
-  'nosso-trabalho',
-  'projetos-e-parcerias',
-  'unidades',
-  'contato',
-];
+const pages = PAGE_SLUGS;
+const publishConfig = getPublishConfig();
 const dist = path.join(root, 'dist');
 
 const read = relative => readFile(path.join(root, relative), 'utf8');
@@ -55,9 +50,9 @@ for (const slug of pages) {
     throw new Error(`Placeholder ausente: ${filename}`);
   }
 
-  const html = compactHtmlSource(source)
+  const html = enhanceHtml(compactHtmlSource(source)
     .replace('<!-- CHROMA_HEADER -->', buildHeader(headerTemplate, filename))
-    .replace('<!-- CHROMA_FOOTER -->', footer);
+    .replace('<!-- CHROMA_FOOTER -->', footer), slug, publishConfig);
   await writeFile(path.join(dist, filename), html, 'utf8');
 }
 
@@ -81,7 +76,11 @@ const compiledCss = cssSource.replace(/url\((['"]?)assets\//g, 'url($1../');
 await mkdir(path.join(dist, 'assets', 'css'), {recursive: true});
 await writeFile(path.join(dist, 'assets', 'css', 'site.css'), compiledCss, 'utf8');
 
+await writeFile(path.join(dist, 'robots.txt'), robotsText(publishConfig), 'utf8');
+const sitemap = sitemapText(publishConfig);
+if (sitemap) await writeFile(path.join(dist, 'sitemap.xml'), sitemap, 'utf8');
+
 await cp(path.join(root, 'src/scripts'), path.join(dist, 'assets/js'), {recursive: true});
 await cp(path.join(root, 'src/data'), path.join(dist, 'assets/data'), {recursive: true});
 
-console.log(`Build Chroma: ${pages.length} páginas, ${CSS_MODULES.length} módulos CSS concatenados, JavaScript modular. Saída: dist/`);
+console.log(`Build Chroma: ${pages.length} páginas, ${CSS_MODULES.length} módulos CSS concatenados, JavaScript modular, SEO: ${publishConfig.public ? 'público autorizado' : 'prévia sem indexação'}. Saída: dist/`);

@@ -36,7 +36,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install playwright Pillow beautifulsoup4
-          python -m playwright install --with-deps chromium
+          if command -v google-chrome >/dev/null 2>&1 || command -v chromium >/dev/null 2>&1; then
+            echo "Usando navegador preinstalado no runner"
+          else
+            python -m playwright install chromium
+          fi
       - name: Teste real de navegacao via HTTP
         run: python tests/runtime_smoke.py
       - name: QA visual responsivo em 36 cenarios

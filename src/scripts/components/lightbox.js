@@ -5,6 +5,7 @@ export function initLightbox() {
   const dialog=document.createElement('dialog');
   dialog.className='v32-art-dialog';
   dialog.setAttribute('aria-label','Imagem ampliada');
+  dialog.setAttribute('aria-modal','true');
   const close=document.createElement('button'); close.type='button'; close.className='v32-art-close';
   close.textContent='×';close.setAttribute('aria-label','Fechar imagem ampliada');
   const preview=document.createElement('img');preview.alt='';

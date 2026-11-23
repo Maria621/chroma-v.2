@@ -1,7 +1,7 @@
 export async function initNews() {
   if(location.protocol==='file:')return;
   try{
-    const r=await fetch('conteudo/novidades.json',{cache:'no-store'});
+    const r=await fetch('conteudo/novidades.json',{cache:'default'});
     if(!r.ok)return;
     const data=await r.json();
     if(!Array.isArray(data.campanhas))return;

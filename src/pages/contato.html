@@ -74,12 +74,13 @@
               <label for="contactName">Como podemos chamar você?</label>
               <input autocomplete="name" id="contactName" maxlength="80" name="name" placeholder="Seu nome" required="" type="text"/>
               <label for="contactUnit">Unidade de interesse</label>
-              <select id="contactUnit" name="unit" required>
+              <select aria-describedby="contactUnitHelp" id="contactUnit" name="unit" required>
                 <option value="diadema">Diadema</option>
                 <option value="itavuvu">Sorocaba · Itavuvu</option>
                 <option value="pannunzio">Sorocaba · Pannunzio</option>
                 <option value="valinhos" disabled>Valinhos · atendimento em confirmação</option>
               </select>
+              <p class="field-help" id="contactUnitHelp">Selecione uma unidade com atendimento disponível. Valinhos terá seu próprio canal após confirmação.</p>
               <label for="contactSubject">Assunto</label>
               <select id="contactSubject" name="subject">
                 <option>Conhecer a escola</option>

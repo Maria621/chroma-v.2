@@ -51,7 +51,7 @@ pages=['index','a-chroma','nosso-trabalho','projetos-e-parcerias','unidades','co
 res=[]
 try:
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
+  browser=pw.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
   for page in pages:
    for w in (320,390,768,1024,1440,1920):
     pg=browser.new_page(viewport={'width':w,'height':800 if w<500 else 900},device_scale_factor=1,reduced_motion='reduce')
@@ -153,3 +153,41 @@ for w in (1440,390):
  sheet=Image.new('RGB',(1200,1220),'white')
  for i,im in enumerate(thumbs):sheet.paste(im,((i%3)*400,(i//3)*610))
  sheet.save(out/f'montage-{w}.jpg',quality=88)
+
+
+# Falhas críticas devem encerrar o QA com código de saída diferente de zero.
+failures=[]
+for result in res:
+ label=f'{result["page"]}@{result["width"]}px'
+ if result.get('h1Count')!=1: failures.append(label+': deve haver exatamente um h1')
+ if result.get('errors'): failures.append(label+': JS/UX '+str(result['errors']))
+ if result.get('brokenImages'): failures.append(label+': imagens inválidas '+str(result['brokenImages']))
+ if result.get('overflow'): failures.append(label+': conteúdo fora da viewport '+str(result['overflow']))
+ if result.get('httpErrors'): failures.append(label+': erros HTTP '+str(result['httpErrors']))
+
+for result in res:
+ if result['page']=='index' and result['width']==1440:
+  if result.get('lightboxOpen') is not True or result.get('lightboxClosed') is not True:
+   failures.append('index@1440px: lightbox falhou')
+  if result.get('carousel',{}).get('before')==result.get('carousel',{}).get('after'):
+   failures.append('index@1440px: navegação do carrossel falhou')
+ if result['page']=='index' and result['width']==390:
+  if result.get('mobileOpened')!='true' or result.get('mobileClosed')!='false' or not result.get('mainRestored'):
+   failures.append('index@390px: menu móvel não abriu/fechou corretamente')
+ if result['page']=='contato' and result['width']==1440:
+  if not result.get('valinhosDisabled') or not result.get('whatsappFallbackVisible') or not result.get('contactStatusVisible'):
+   failures.append('contato@1440px: formulário ou recuperação não funcionou')
+ if result['page']=='a-chroma' and result['width']==1440:
+  if result.get('timelinePanelLabel')!=result.get('timelineActiveTab'):
+   failures.append('a-chroma@1440px: vínculo da timeline incorreto')
+
+(out/'summary.json').write_text(json.dumps({
+ 'pages':len(pages),'viewports':[320,390,768,1024,1440,1920],
+ 'scenarios':len(res),'critical_failures':failures
+},ensure_ascii=False,indent=2))
+
+if failures:
+ print('QA VISUAL REPROVADO: '+str(len(failures))+' falha(s) críticas')
+ for failure in failures: print(' - '+failure)
+ raise SystemExit(1)
+print('QA visual aprovado: 36 combinações e fluxos-chave; capturas em qa/.')

@@ -1,4 +1,4 @@
-# Instituto Chroma — site institucional V3.6 (Etapas 01–05)
+# Instituto Chroma — site institucional V3.7 (Etapas 01–08)
 
 Evolução editorial controlada da V3.5: marcos históricos de unidades confirmados, identidade institucional padronizada e pendências separadas para validação. O layout e as interações aprovados foram preservados. A publicação permanece estática, com componentes reutilizáveis e JavaScript modular.
 
@@ -16,11 +16,14 @@ Evolução editorial controlada da V3.5: marcos históricos de unidades confirma
 - `tests/institutional.test.mjs`: testes de regressão para os marcos, a identidade e Valinhos.
 - `tests/design-system.test.mjs`: validação de fontes, legibilidade e contraste de tokens WCAG AA.
 - `tests/visual-media.test.mjs`: testes de regressão para proporções de imagens e responsividade do hero e rodapé.
-- `tests/visual_qa.py`: roteiro de QA visual e funcional local para Chromium + Playwright, sem depender de um domínio público.
+- `tests/visual_qa.py`: QA responsivo e funcional com Chromium + Playwright (6 páginas × 6 larguras) e relatório de falhas.
+- `tests/runtime_smoke.py`: teste real do JS modular via servidor HTTP local.
+- `scripts/site-metadata.mjs`: indexação e dados estruturados sob configuração explícita.
+- `scripts/image-dimensions.mjs`: dimensões intrínsecas de imagens, sem dependências externas.
 
 ## Executar
 
-Requer Node.js 20 ou superior.
+Requer Node.js 22 (conforme o campo `engines` do projeto).
 
 ```bash
 npm run build
@@ -62,3 +65,7 @@ Montserrat continua nos títulos e elementos de navegação; Poppins permanece n
 ## Etapa 05 — Refinamento visual e imagens
 
 Hero principal mais compacto e com imagem inteira; heros internos revisados, artes ilustrativas e campanhas sem zoom/corte intencional, cartões de unidades padronizados e rodapé compacto responsivo. A identidade original e os conteúdos foram mantidos. Consulte `docs/etapa-05-refino-visual.md`. A inspeção visual real e o aceite da branch atual ainda são necessários.
+
+## Etapas 06–08 — Acessibilidade, SEO e homologação
+
+O menu, o carrossel, o lightbox e o formulário tiveram ajustes de UX/acessibilidade. O build passa a gerar dimensões reais das imagens e proteção de indexação nas prévias, com canonical/sitemap apenas após configuração de domínio público validado. O CI em `.github/workflows/quality.yml` testa a navegação modular real e as capturas de 36 cenários. **Produção permanece intacta.** Consulte `docs/etapas-06-08-qa-lancamento.md` para pendências e publicação segura.

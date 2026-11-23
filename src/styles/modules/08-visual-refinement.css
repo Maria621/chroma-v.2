@@ -201,3 +201,46 @@
     transition: none;
   }
 }
+
+
+/* Etapa 06 — acesso por teclado, rolagem e alvos de toque. */
+.chroma-v33 .mobile-nav[hidden] { display: none !important; }
+.chroma-v33 .mobile-nav {
+  max-height: calc(100dvh - 76px);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+.chroma-v33 .mobile-nav a {
+  min-height: 44px;
+  align-content: center;
+}
+.chroma-v3 :is(.v3-btn, .v3-link, .v33-copy-address, .gallery-prev,
+  .gallery-next, .tm-prev, .tm-next, .menu-toggle, .v33-scrolltop):focus-visible {
+  outline: 3px solid var(--ds-focus-ring, #ffce00);
+  outline-offset: 3px;
+}
+.chroma-v3 :is(input, select, textarea):focus-visible {
+  outline: 3px solid #0b67af;
+  outline-offset: 2px;
+}
+.chroma-v3 .v3-whatsapp-form .field-help {
+  color: var(--ds-muted-text, #52667d);
+  font-size: .875rem;
+  line-height: 1.6;
+  margin: 4px 0 0;
+}
+@media (max-width: 460px) {
+  .chroma-v3 .v3-hero-actions a { min-height: 44px; align-items: center; }
+  .chroma-v3 .v3-hero-content .v3-eyebrow { font-size: 11px; letter-spacing: .04em; }
+  .chroma-v34 .v34-footer-meta { overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chroma-v33 .v3-update-grid article,
+  .chroma-v33 .v3-unit,
+  .chroma-v33 .v3-btn,
+  .chroma-v33 .v3-photo img,
+  .chroma-v33 .v3-gallery-section .gallery-tilt {
+    transition-duration: 0s;
+    animation-duration: 0s;
+  }
+}

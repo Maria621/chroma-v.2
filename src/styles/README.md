@@ -36,3 +36,7 @@ As fontes foram separadas em oito módulos ordenados, definidos em
 ## Itens deliberadamente não alterados
 
 A existência de seletores legados (`v3-`, `v32-`, `v33-`, `v34-`) e declarações repetidas é um débito técnico controlado. Removê-los sem uma referência visual poderia modificar o design aprovado. Esta etapa estabeleceu módulos, build legível e testes; a eliminação semântica deverá ocorrer com comparação de capturas e revisão técnica posterior.
+
+## Etapa 06 — Usabilidade e acessibilidade
+
+O arquivo `08-visual-refinement.css` contém também as correções de menu rolável, foco visível, áreas de toque, redução de movimento e ajuda de campos adicionadas após o refinamento visual. Essa extensão foi mantida no mesmo módulo para evitar mais uma camada de sobrescritas com seletores versionados.

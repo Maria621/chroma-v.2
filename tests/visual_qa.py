@@ -1,4 +1,4 @@
-import json, time, os, pathlib, mimetypes, re, base64
+import json, time, os, pathlib, mimetypes, re, base64, shutil
 from bs4 import BeautifulSoup
 from PIL import Image,ImageDraw
 from playwright.sync_api import sync_playwright
@@ -51,7 +51,7 @@ pages=['index','a-chroma','nosso-trabalho','projetos-e-parcerias','unidades','co
 res=[]
 try:
  with sync_playwright() as pw:
-  browser=pw.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
+  browser=pw.chromium.launch(executable_path=shutil.which('google-chrome') or shutil.which('google-chrome-stable') or shutil.which('chromium'),headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
   for page in pages:
    for w in (320,390,768,1024,1440,1920):
     pg=browser.new_page(viewport={'width':w,'height':800 if w<500 else 900},device_scale_factor=1,reduced_motion='reduce')

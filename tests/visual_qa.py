@@ -123,6 +123,9 @@ try:
      pg.screenshot(path=str(out/f'{page}-{w}.png'),full_page=True)
     if page=='index' and w==1440:
      before=pg.locator('.gallery-count').inner_text();pg.locator('.gallery-next').click();d['carousel']={'before':before,'after':pg.locator('.gallery-count').inner_text(),'dots':pg.locator('.v33-gallery-dots button').count()}
+     dotStyle=pg.locator('.v33-gallery-dots button.is-active').evaluate("""e => ({background:getComputedStyle(e).backgroundColor,height:e.getBoundingClientRect().height,width:e.getBoundingClientRect().width,indicatorHeight:getComputedStyle(e,'::after').height,indicatorWidth:getComputedStyle(e,'::after').width})""")
+     d['galleryIndicatorStyle']=dotStyle
+     assert dotStyle['background']=='rgba(0, 0, 0, 0)' and dotStyle['height']>=44 and dotStyle['width']>=44 and dotStyle['indicatorHeight']=='9px' and dotStyle['indicatorWidth']=='52px', str(dotStyle)
      pg.locator('.v33-gallery-dots button').nth(3).click();d['carousel']['click4']=pg.locator('.gallery-count').inner_text();d['carousel']['dotRect']=pg.locator('.v33-gallery-dots button').first.bounding_box()
      pg.locator('.gallery-slide.is-active .media-zoom-button').click();d['lightboxOpen']=pg.locator('dialog.v32-art-dialog').evaluate('(d)=>d.open');pg.keyboard.press('Escape');d['lightboxClosed']=not pg.locator('dialog.v32-art-dialog').evaluate('(d)=>d.open')
     if page=='index' and w==390:

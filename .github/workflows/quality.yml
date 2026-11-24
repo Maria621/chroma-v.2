@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "preview/**"
+      - "refactor/v3-7-design-aprovado"
   pull_request:
     branches:
       - main

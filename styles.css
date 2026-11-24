@@ -352,9 +352,33 @@ body.chroma-v2{background:#fff}
 .chroma-v2 .news-small-img img{object-fit:contain;background:#07275c}
 @media(max-width:760px){.chroma-v2 .units-directory .unit-item{grid-template-columns:1fr}.chroma-v2 .work-showcase.v2-work-teaser{min-height:300px}}
 
-/* Identidade oficial da marca recebida: versão azul para fundo claro */
-.chroma-v2 .logo-link{background:#fff;border-radius:3px;padding:8px 9px;width:198px;min-height:48px}
-.chroma-v2 .logo-link img{width:180px;height:auto;max-height:none}
+/* Logotipo oficial sobre o cabeçalho escuro, sem placa branca. */
+.chroma-v2 .logo-link{
+  display:grid;
+  place-items:center;
+  background:transparent;
+  border-radius:0;
+  padding:8px 9px;
+  width:198px;
+  min-height:48px;
+}
+.chroma-v2 .logo-link img{
+  grid-area:1 / 1;
+  width:180px;
+  height:auto;
+  max-height:none;
+  filter:brightness(0) invert(1);
+}
+/* Reutiliza somente o quadrado amarelo do arquivo original. */
+.chroma-v2 .logo-link::after{
+  content:"";
+  grid-area:1 / 1;
+  align-self:stretch;
+  justify-self:stretch;
+  background:url("assets/chroma-logo-oficial.png") center / 100% 100% no-repeat;
+  clip-path:inset(0 94.8% 71% 0);
+  pointer-events:none;
+}
 .chroma-v2 .footer-about>a:first-child{display:inline-flex;background:white;padding:9px 12px;border-radius:3px}
 .chroma-v2 .footer-about>a:first-child img{width:180px;max-height:none}
 @media(max-width:1200px){.chroma-v2 .logo-link{width:161px;padding:7px}.chroma-v2 .logo-link img{width:147px}}

@@ -7,7 +7,9 @@
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "qa:visual": "python3 tests/visual_qa.py",
-    "qa:runtime": "python3 tests/runtime_smoke.py"
+    "qa:runtime": "python3 tests/runtime_smoke.py",
+    "check:approved": "node --test tests/approved-baseline.test.mjs",
+    "validate": "npm run build && npm test"
   },
   "engines": {
     "node": "22.x"

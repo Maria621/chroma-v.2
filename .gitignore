@@ -3,3 +3,10 @@ playwright-report/
 test-results/
 *.log
 .DS_Store
+dist/
+qa/
+.vercel/
+.env
+.env.*
+!.env.example
+__pycache__/

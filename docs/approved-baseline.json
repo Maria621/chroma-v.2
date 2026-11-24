@@ -1,0 +1,298 @@
+{
+  "approvedCommit": "fb8472251c595914a974362e0f0fb434ef9b8c35",
+  "algorithm": "git-blob-sha1",
+  "files": [
+    {
+      "path": "a-chroma.html",
+      "sha": "99404b5f12fd3de91ed887ae2b6b168595e67b14"
+    },
+    {
+      "path": "assets/aula-inaugural.webp",
+      "sha": "7c969d019b37c5327cf57e8d890f7656c5ab0f97"
+    },
+    {
+      "path": "assets/banner-campanha-cupons.webp",
+      "sha": "86ba6934646bff57f60c19c2a488568d88290e41"
+    },
+    {
+      "path": "assets/banner-consciencia-negra.webp",
+      "sha": "b4e3f39b9382252246c85375efa471c66c6c84b2"
+    },
+    {
+      "path": "assets/banner-novidades-natal.webp",
+      "sha": "1070b03f30460acbbc4f1432c06736a45ef67059"
+    },
+    {
+      "path": "assets/banner-presenca-premiada.webp",
+      "sha": "31a2c73981ab7f276f4784b870208b1b17f040b4"
+    },
+    {
+      "path": "assets/campanha-consciencia-negra-2026.webp",
+      "sha": "f11592474390b020eff4663df5052e15281c769d"
+    },
+    {
+      "path": "assets/campanha-consciencia-negra.webp",
+      "sha": "bff3d76ca3c3e200d8b5c5febd2cdb808c1da56b"
+    },
+    {
+      "path": "assets/campanha-cupom.webp",
+      "sha": "9279da257cb541a03065683f1a46999c82dfc5f5"
+    },
+    {
+      "path": "assets/campanha-natal.webp",
+      "sha": "aad676bfa8d0f3c4be062fe27bf6499f3c7e418e"
+    },
+    {
+      "path": "assets/campanha-presenca-premiada.webp",
+      "sha": "804ba7bfbf2c698b0b5a2d251cb403c6bc95de12"
+    },
+    {
+      "path": "assets/chroma-ambiente-conceitual.webp",
+      "sha": "44021c096de8f72e933ab35029dc6d4ee3a58597"
+    },
+    {
+      "path": "assets/chroma-conceito-aula.webp",
+      "sha": "daa98d99f351da359db635d9d56b281ae891057c"
+    },
+    {
+      "path": "assets/chroma-conceito-fachada.webp",
+      "sha": "9045fadb180de1e998077f91c20cdba8a9be7a34"
+    },
+    {
+      "path": "assets/chroma-conceito-jovens.webp",
+      "sha": "411ec0beb415bd35b8d91924a4970c4129ce74ac"
+    },
+    {
+      "path": "assets/chroma-conceito-projeto.webp",
+      "sha": "a9f6b6cb66a854ed8f91ad2cde84246de5c05be7"
+    },
+    {
+      "path": "assets/chroma-educacao-em-acao.webp",
+      "sha": "320bf1e436cbf2fa00eaa4c2e33b15d04b131be1"
+    },
+    {
+      "path": "assets/chroma-logo-oficial.png",
+      "sha": "8ddb922031760c0314b5c43e674199ddd53c078c"
+    },
+    {
+      "path": "assets/chroma-logo-original.png",
+      "sha": "41c6fa1b130259b29dd6e8672c59f780c94241ef"
+    },
+    {
+      "path": "assets/chroma-logo.png",
+      "sha": "dca1163d36f8ba7e4d8fd37293c5d85fa705b731"
+    },
+    {
+      "path": "assets/chroma-metodologia-lousa-e-pc.webp",
+      "sha": "dc85c918d5291f4741491d62e875c95aa7e00fd4"
+    },
+    {
+      "path": "assets/chroma-novidades-horizontal-hires.webp",
+      "sha": "225d6b8b171817588c5f5da157d18474c48810a3"
+    },
+    {
+      "path": "assets/chroma-novidades-horizontal.webp",
+      "sha": "bb916226c2552c183a5e5b3f621825f6101a713e"
+    },
+    {
+      "path": "assets/chroma-parceria-ilustrativa.webp",
+      "sha": "7b314adc9f1961ac2e6feee87b866624935cd099"
+    },
+    {
+      "path": "assets/chroma-pessoas-detalhe.webp",
+      "sha": "954dc92fb25d3e4dc0c34acc4e47cfed5c29c173"
+    },
+    {
+      "path": "assets/chroma-unidade-anhanguera-ilustrativa.webp",
+      "sha": "0733182c5447afd765d132366bc47fa55a7e2475"
+    },
+    {
+      "path": "assets/chroma-unidade-diadema-ilustrativa.webp",
+      "sha": "3b346e0bc171067e83a14c801eadc66570186226"
+    },
+    {
+      "path": "assets/chroma-unidade-itavuvu-ilustrativa.webp",
+      "sha": "e01c34b01bd1621549a58b0899502374de57ae3d"
+    },
+    {
+      "path": "assets/css/site.css",
+      "sha": "636b75feb633b7fcd968091a6952e5e3320f5164"
+    },
+    {
+      "path": "assets/data/timeline.js",
+      "sha": "148cf3bb82eaea7aef430910476f02814f44b820"
+    },
+    {
+      "path": "assets/js/components/carousel.js",
+      "sha": "5d8e16dbb83e2a6ead68d09474021faa1c2d5076"
+    },
+    {
+      "path": "assets/js/components/contact.js",
+      "sha": "5f0e1cb68b5b49d0b6bef9971b82486b9027e79c"
+    },
+    {
+      "path": "assets/js/components/lightbox.js",
+      "sha": "c24c7cfff6a681ed6553dd7cd35d0845c6f0d964"
+    },
+    {
+      "path": "assets/js/components/navigation.js",
+      "sha": "e6c3a2397aa45467825b78ef21de504c5d02b322"
+    },
+    {
+      "path": "assets/js/components/news.js",
+      "sha": "7c5c157910858bf7b625e2bf25c6354145d55210"
+    },
+    {
+      "path": "assets/js/components/timeline.js",
+      "sha": "d50493a857146c32f327872f5ec9ea5d1fa07fa4"
+    },
+    {
+      "path": "assets/js/components/units.js",
+      "sha": "64ba2b3e22d562c5c45f2d206e0e1ade342a539e"
+    },
+    {
+      "path": "assets/js/main.js",
+      "sha": "9953ba35cd844c086b06684b203f993bb51c9b69"
+    },
+    {
+      "path": "assets/missao-visao-valores-original.png",
+      "sha": "4cf68031e48abc9fb611a2e29ca5557a44195f73"
+    },
+    {
+      "path": "assets/presenca-premiada.webp",
+      "sha": "b629bf3120cf47c88c31e87132c5764732cce50d"
+    },
+    {
+      "path": "contato.html",
+      "sha": "fb7a64371b40c3585168fd976f6f7af8c4adde29"
+    },
+    {
+      "path": "conteudo/novidades.json",
+      "sha": "c09df3dfd885ecc77fd15e5298c4895572d6bbf6"
+    },
+    {
+      "path": "index.html",
+      "sha": "afd280835f8da95330e84060c5e0eec256f5f30b"
+    },
+    {
+      "path": "nosso-trabalho.html",
+      "sha": "23e430fd43465a69a563746ee1b4684b9d6614c3"
+    },
+    {
+      "path": "projetos-e-parcerias.html",
+      "sha": "3da8f3e91770cfe72aa74913be81709c4b521edb"
+    },
+    {
+      "path": "src/data/timeline.js",
+      "sha": "5e2d6da277efaa2ad8215c2ce9b40c6c9739b618"
+    },
+    {
+      "path": "src/pages/a-chroma.html",
+      "sha": "859cd9f1d7b5f4a69bbf01b034a66b6ad007f227"
+    },
+    {
+      "path": "src/pages/contato.html",
+      "sha": "280d47a9d72d706353bbf3094d87728de9e909f6"
+    },
+    {
+      "path": "src/pages/index.html",
+      "sha": "d1ce6964e3cabdb40aa8c3fe946c9728ab52b533"
+    },
+    {
+      "path": "src/pages/nosso-trabalho.html",
+      "sha": "958dec39c44e30c201ff81c4a11dd5027002c7f6"
+    },
+    {
+      "path": "src/pages/projetos-e-parcerias.html",
+      "sha": "c421d4867af7939983c577247ac3f3929d4b411b"
+    },
+    {
+      "path": "src/pages/unidades.html",
+      "sha": "98d61201b7ef5c33c95f5500e1ecaa334d9e5fce"
+    },
+    {
+      "path": "src/partials/footer.html",
+      "sha": "daa21227ecd89b6cf134e05223f24e09ccccc82b"
+    },
+    {
+      "path": "src/partials/header.html",
+      "sha": "5c46ab3ceb7142fa15141b4c8cebfcbb6f5d7257"
+    },
+    {
+      "path": "src/scripts/components/carousel.js",
+      "sha": "febc6f36cfe60367fc2881ed62ae3b35118fc282"
+    },
+    {
+      "path": "src/scripts/components/contact.js",
+      "sha": "804f9c19f98406b2429b7de4dc9f97980e1a8a4d"
+    },
+    {
+      "path": "src/scripts/components/lightbox.js",
+      "sha": "3bf0ef2e0ac088070cd3e0ef76251b963955c9d1"
+    },
+    {
+      "path": "src/scripts/components/navigation.js",
+      "sha": "096af6f1d48bc6e401e8f47330c0dbc717acb40d"
+    },
+    {
+      "path": "src/scripts/components/news.js",
+      "sha": "ca58d3bc0913292b3ebc3867879a5408b04deab7"
+    },
+    {
+      "path": "src/scripts/components/timeline.js",
+      "sha": "71aaa0fc7953088f5d449b0b606fc0acbc3bf55d"
+    },
+    {
+      "path": "src/scripts/components/units.js",
+      "sha": "62b477bb5eedc9640dd8712c301ffa0236859b99"
+    },
+    {
+      "path": "src/scripts/main.js",
+      "sha": "9953ba35cd844c086b06684b203f993bb51c9b69"
+    },
+    {
+      "path": "src/styles/README.md",
+      "sha": "b903d999d4e32bd18461420f2cc63f0ba97cbaf8"
+    },
+    {
+      "path": "src/styles/manifest.mjs",
+      "sha": "f15dd9fcaba4178519f158f2ca8ab008595964f0"
+    },
+    {
+      "path": "src/styles/modules/01-foundation.css",
+      "sha": "2e48405101fd32af9cd4fe8b2eb4f64228354304"
+    },
+    {
+      "path": "src/styles/modules/02-institutional-layout.css",
+      "sha": "0d7b37531955021949865ab5774424283e4599db"
+    },
+    {
+      "path": "src/styles/modules/03-page-components.css",
+      "sha": "f555bca7dae3ebaa5ca8bab388761f955b01b486"
+    },
+    {
+      "path": "src/styles/modules/04-interaction-system.css",
+      "sha": "ffbf50163dc934113855cc58e7c31372461618fa"
+    },
+    {
+      "path": "src/styles/modules/05-quality-accessibility.css",
+      "sha": "31107aff665e6115319af3511c7a8f72c1f55095"
+    },
+    {
+      "path": "src/styles/modules/06-reviewed-fixes.css",
+      "sha": "0a9b0f34616d49cca2799e9a60bfd5564e535954"
+    },
+    {
+      "path": "src/styles/modules/07-design-system.css",
+      "sha": "22fb6622dff04468e6f00c9b5f973f26c87b4bea"
+    },
+    {
+      "path": "src/styles/modules/08-visual-refinement.css",
+      "sha": "968575cb1b757dfd2db1a6080c5a1efb97b14a2e"
+    },
+    {
+      "path": "unidades.html",
+      "sha": "26cf607574aa55fc1c67db75b6175dc869ba5a95"
+    }
+  ]
+}

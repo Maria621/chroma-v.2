@@ -1,0 +1,169 @@
+name: Chroma V2 - Regressao visual e funcional
+on:
+  push:
+    branches:
+      - refactor/estrutura-v2
+    paths:
+      - '.github/workflows/regression-v2.yml'
+      - '**.html'
+      - 'css/**'
+      - 'js/**'
+      - 'assets/**'
+      - 'conteudo/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: chroma-v2-regression
+  cancel-in-progress: true
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout refatoracao
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: candidate
+          persist-credentials: false
+      - name: Checkout referencia original
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 5ff370f36488d3812f704c1017afc82687ee6053
+          path: baseline
+          persist-credentials: false
+      - name: Dependencias
+        run: |
+          python -m pip install playwright==1.51.0 Pillow==11.1.0
+          if ! command -v google-chrome && ! command -v chromium; then
+            python -m playwright install --with-deps chromium
+          fi
+      - name: Comparar as seis paginas em seis resolucoes
+        shell: bash
+        run: |
+          mkdir -p qa
+          python - <<'PY'
+          from pathlib import Path
+          from functools import partial
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from threading import Thread
+          from shutil import which
+          from PIL import Image, ImageChops
+          from playwright.sync_api import sync_playwright
+          import json
+          pages = ['index','a-chroma','nosso-trabalho','projetos-e-parcerias','unidades','contato']
+          widths = [360,390,768,1024,1440,1920]
+          out = Path('qa')
+          results, failures = [], []
+          class Quiet(SimpleHTTPRequestHandler):
+              def log_message(self,*args): pass
+          servers = []
+          for folder in ['baseline','candidate']:
+              server = ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(Path(folder).resolve())))
+              Thread(target=server.serve_forever,daemon=True).start()
+              servers.append(server)
+          urls = ['http://127.0.0.1:'+str(s.server_port) for s in servers]
+          def open_page(browser, url, slug, width):
+              page = browser.new_page(viewport={'width':width,'height':844 if width<500 else 900},device_scale_factor=1,reduced_motion='reduce')
+              # Isolate external services: both builds use the same fallback fonts.
+              page.route('**/*',lambda route: route.continue_() if route.request.url.startswith('http://127.0.0.1:') else route.abort())
+              errors, http, news = [], [], []
+              page.on('pageerror',lambda e:errors.append(str(e)))
+              page.on('response',lambda r:http.append([r.status,r.url]) if r.status>=400 else None)
+              page.on('request',lambda r:news.append(r.url) if r.url.endswith('/conteudo/novidades.json') else None)
+              response=page.goto(url+'/'+slug+'.html',wait_until='networkidle',timeout=30000)
+              assert response.status==200
+              page.evaluate("""async () => {
+                  for (const im of document.images) im.loading='eager';
+                  await Promise.all([...document.images].map(im=>im.decode().catch(()=>null)));
+                  await document.fonts.ready;
+              }""")
+              return page,errors,http,news
+          def metrics(page):
+              return page.evaluate("""() => ({
+                  height:document.documentElement.scrollHeight,
+                  overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),
+                  broken:[...document.images].filter(i=>i.src && !i.naturalWidth).map(i=>i.getAttribute('src')),
+                  h1:document.querySelectorAll('main h1').length,
+                  links:[...document.querySelectorAll('a[href]')].map(a=>a.getAttribute('href')),
+                  text:document.body.innerText.replace(/\s+/g,' ').trim()
+              })""")
+          try:
+              with sync_playwright() as pw:
+                  browser=pw.chromium.launch(executable_path=which('google-chrome') or which('chromium'),headless=True,args=['--no-sandbox'])
+                  for slug in pages:
+                      for width in widths:
+                          label=f'{slug}-{width}'
+                          pair=[]
+                          for kind,url in zip(['baseline','candidate'],urls):
+                              pg,err,http,news=open_page(browser,url,slug,width)
+                              m=metrics(pg)
+                              pg.screenshot(path=str(out/f'{label}-{kind}.png'),full_page=True,animations='disabled')
+                              m.update(errors=err,http=http,news=len(news))
+                              pg.close()
+                              pair.append(m)
+                          a,b=pair
+                          with Image.open(out/f'{label}-baseline.png') as x, Image.open(out/f'{label}-candidate.png') as y:
+                              if x.size==y.size:
+                                  diff=ImageChops.difference(x.convert('RGB'),y.convert('RGB'))
+                                  box=diff.getbbox()
+                                  changed=sum(n for pixel,n in diff.getcolors(maxcolors=16777216) if pixel!=(0,0,0)) if box else 0
+                                  ratio=changed/(x.width*x.height)
+                                  if box: diff.save(out/f'{label}-diff.png')
+                              else:
+                                  ratio=1.0
+                          item={'page':slug,'width':width,'pixel_difference':ratio,'baseline':{k:v for k,v in a.items() if k not in ('text','links')},'candidate':{k:v for k,v in b.items() if k not in ('text','links')}}
+                          results.append(item)
+                          if ratio>0: failures.append(label+': diferenca visual '+str(ratio))
+                          if a['text']!=b['text'] or a['links']!=b['links']: failures.append(label+': conteudo ou links divergentes')
+                          if b['errors'] or b['http'] or b['broken'] or b['h1']!=1 or b['overflow']>a['overflow']: failures.append(label+': falha de execucao')
+                          if b['news']!=(1 if slug=='index' else 0): failures.append(label+': requisicao de campanhas incorreta')
+                          print(label, 'diff=',ratio,'overflow=',b['overflow'],'news=',b['news'],flush=True)
+                  for kind,url in zip(['baseline','candidate'],urls):
+                      pg,err,http,news=open_page(browser,url,'index',390)
+                      menu=pg.locator('.menu-toggle')
+                      menu.click()
+                      assert pg.locator('.mobile-nav').is_visible() and menu.get_attribute('aria-expanded')=='true',kind+' menu'
+                      pg.keyboard.press('Escape')
+                      assert not pg.locator('.mobile-nav').is_visible(),kind+' Escape'
+                      menu.click()
+                      pg.locator('.mobile-nav a[href="unidades.html"]').click()
+                      assert pg.url.endswith('/unidades.html'),kind+' navegacao mobile'
+                      pg.close()
+                      pg,err,http,news=open_page(browser,url,'index',1440)
+                      count=pg.locator('.gallery-count')
+                      before=count.inner_text()
+                      pg.locator('.gallery-next').click()
+                      assert count.inner_text()!=before,kind+' galeria'
+                      pg.locator('.gallery-prev').click()
+                      assert count.inner_text()==before,kind+' galeria voltar'
+                      assert not err,kind+' erros galeria'
+                      pg.close()
+                      pg,err,http,news=open_page(browser,url,'a-chroma',1440)
+                      tabs=pg.locator('.timeline-widget [role="tab"]')
+                      tabs.nth(1).click()
+                      assert tabs.nth(1).get_attribute('aria-selected')=='true',kind+' timeline'
+                      tabs.nth(1).press('ArrowRight')
+                      assert tabs.nth(2).get_attribute('aria-selected')=='true',kind+' timeline teclado'
+                      pg.locator('.tm-prev').click()
+                      assert tabs.nth(1).get_attribute('aria-selected')=='true',kind+' timeline anterior'
+                      assert not err,kind+' erros timeline'
+                      pg.close()
+                      print(kind+': menu, navegação, galeria e timeline aprovados',flush=True)
+                  browser.close()
+          except Exception as e:
+              failures.append(str(e))
+              raise
+          finally:
+              (out/'results.json').write_text(json.dumps({'cases':results,'failures':failures},ensure_ascii=False,indent=2))
+              for server in servers: server.shutdown()
+          if failures: raise SystemExit('\n'.join(failures))
+          print('36 pares de capturas identicos e testes funcionais aprovados.')
+          PY
+      - name: Evidencias
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: chroma-v2-regression
+          path: qa/
+          retention-days: 7

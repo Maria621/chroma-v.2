@@ -82,6 +82,10 @@ jobs:
                   await Promise.all([...document.images].map(im=>im.decode().catch(()=>null)));
                   await document.fonts.ready;
               }""")
+              if 'candidate' in str(url) or url == urls[1]:
+                  assert page.locator('link[rel="canonical"]').count()==1, slug+' canonical'
+                  assert page.locator('link[rel="canonical"]').get_attribute('href')=='https://chroma-v2-black.vercel.app'+('/' if slug=='index' else '/'+slug+'.html'),slug+' canonical incorreta'
+                  assert page.locator('html').get_attribute('lang')=='pt-BR',slug+' idioma'
               return page,errors,http,news
           def metrics(page):
               return page.evaluate("""() => ({
@@ -130,6 +134,7 @@ jobs:
                       assert pg.locator('.mobile-nav').is_visible() and menu.get_attribute('aria-expanded')=='true',kind+' menu'
                       pg.keyboard.press('Escape')
                       assert not pg.locator('.mobile-nav').is_visible(),kind+' Escape'
+                      if kind=='candidate': assert menu.evaluate('(e)=>e===document.activeElement'),kind+' foco apos Escape'
                       menu.click()
                       pg.locator('.mobile-nav a[href="unidades.html"]').click()
                       assert pg.url.endswith('/unidades.html'),kind+' navegacao mobile'
@@ -149,6 +154,7 @@ jobs:
                       assert tabs.nth(1).get_attribute('aria-selected')=='true',kind+' timeline'
                       tabs.nth(1).press('ArrowRight')
                       assert tabs.nth(2).get_attribute('aria-selected')=='true',kind+' timeline teclado'
+                      if kind=='candidate': assert pg.locator('#tm-panel').get_attribute('aria-labelledby')==tabs.nth(2).get_attribute('id'),kind+' painel acessivel'
                       pg.locator('.tm-prev').click()
                       assert tabs.nth(1).get_attribute('aria-selected')=='true',kind+' timeline anterior'
                       assert not err,kind+' erros timeline'

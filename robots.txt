@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chroma-v2-black.vercel.app/sitemap.xml

@@ -17,7 +17,10 @@
     });
     mobile.querySelectorAll('a').forEach(link=>link.addEventListener('click',close));
     document.addEventListener('keydown',e=>{
-      if(e.key==='Escape')close()
+      if(e.key==='Escape'&&menu.getAttribute('aria-expanded')==='true'){
+        close();
+        menu.focus();
+      }
     });
     window.addEventListener('resize',()=>{
       if(window.innerWidth>1000)close()
@@ -41,8 +44,14 @@
     document.querySelector('.gallery-prev')?.addEventListener('click',()=>show(index-1));
     document.querySelector('.gallery-next')?.addEventListener('click',()=>show(index+1));
     gallery.addEventListener('keydown',e=>{
-      if(e.key==='ArrowRight')show(index+1);
-      if(e.key==='ArrowLeft')show(index-1)
+      if(e.key==='ArrowRight'){
+        e.preventDefault();
+        show(index+1);
+      }
+      if(e.key==='ArrowLeft'){
+        e.preventDefault();
+        show(index-1);
+      }
     });
     show(0);
   }
@@ -73,6 +82,7 @@
         tab.setAttribute('aria-selected',String(k===current));
         tab.tabIndex=k===current?0:-1
       });
+      panel.setAttribute('aria-labelledby',tabs[current].id);
       panel.querySelector('.timeline-date').textContent=d.date;
       panel.querySelector('h3').textContent=d.title;
       panel.querySelector('.timeline-content p').textContent=d.description;

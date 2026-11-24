@@ -1,10 +1,10 @@
-# Instituto Chroma — Site institucional (revisão editorial V2.1)
+# Instituto Chroma — Site institucional V2
 
-Versão independente, baseada na V2 original, corrigida após auditoria de repetições e informações não confirmadas. **Não foi publicada nem sobreposta à V2 anterior.**
+Site estático institucional. Esta branch de manutenção reorganiza o código sem alterar intencionalmente o design, conteúdo ou URLs das páginas. A publicação deve ocorrer somente após homologação.
 
 ## Abrir o site
 
-Abra `index.html` no navegador. As seis páginas possuem arquivos HTML próprios e navegação interna. Para que `conteudo/novidades.json` atualize automaticamente os comunicados, sirva a pasta por HTTP/HTTPS; ao abrir diretamente os arquivos, os conteúdos de notícias já existentes no HTML permanecem visíveis.
+Na raiz do projeto, execute `python -m http.server 8000` e acesse `http://localhost:8000`. As seis páginas também podem ser abertas diretamente; nesse caso, as notícias estáticas permanecem disponíveis sem atualização via JSON.
 
 ## Correções aplicadas
 
@@ -19,7 +19,7 @@ Abra `index.html` no navegador. As seis páginas possuem arquivos HTML próprios
 
 ## Restrições que permanecem em vigor
 
-O site **não é loja de cursos**: não inclui preços, promoções de matrícula, catálogos comerciais ou checkout. Cada página tem finalidade editorial própria, conforme `MATRIZ_EDITORIAL.md`. Não devemos exibir nome de parceiro, data institucional, resultados, endereço ou unidades sem confirmação. As artes ilustrativas e conceituais não devem ser tratadas como fotografias documentais de alunos, professores ou instalações reais.
+O site **não é loja de cursos**: não inclui preços, promoções de matrícula, catálogos comerciais ou checkout. Cada página tem finalidade editorial própria, conforme `docs/MATRIZ_EDITORIAL.md`. Não devemos exibir nome de parceiro, data institucional, resultados, endereço ou unidades sem confirmação. As artes ilustrativas e conceituais não devem ser tratadas como fotografias documentais de alunos, professores ou instalações reais.
 
 ## Pendências antes da publicação
 
@@ -32,8 +32,19 @@ O site **não é loja de cursos**: não inclui preços, promoções de matrícul
 
 ## Arquivos
 
-`index.html`, `a-chroma.html`, `nosso-trabalho.html`, `projetos-e-parcerias.html`, `unidades.html`, `contato.html`, `styles.css`, `site.js`, `conteudo/novidades.json`, `assets/`, `MATRIZ_EDITORIAL.md`.
+`index.html`, `a-chroma.html`, `nosso-trabalho.html`, `projetos-e-parcerias.html`, `unidades.html`, `contato.html`, `css/styles.css`, `js/site.js`, `conteudo/novidades.json`, `assets/`, `docs/MATRIZ_EDITORIAL.md`.
 
-## QA executado
+## QA histórico da versão anterior
 
 Verificação estática de seis páginas, navegação interna, existência dos arquivos de imagem e sintaxe do JavaScript. Renderização isolada de 1440, 390 e 320 px, sem rolagem horizontal ou erros JavaScript observados. Testes interativos do menu mobile, carrossel e linha do tempo realizados; não houve teste público ou publicação. Imagens lazy-load fora da área inicial são carregadas conforme a rolagem, e as verificações de produção continuam pendentes.
+
+## Estrutura e manutenção
+
+- HTML na raiz: URLs das páginas preservadas.
+- `css/styles.css`: estilos e responsividade, na ordem original da cascata.
+- `js/site.js`: menu, galeria, linha do tempo, animações e notícias.
+- `assets/`: imagens originais preservadas.
+- `conteudo/novidades.json`: campanhas.
+- `docs/`: histórico e documentação editorial.
+
+Validar a branch em preview antes de publicar. Não remover CSS sem auditoria e regressão visual.
